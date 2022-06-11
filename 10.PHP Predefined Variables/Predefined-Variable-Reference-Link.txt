@@ -1,0 +1,4 @@
+
+Refer the PHP Official Page For PHP Based Predefined Variables-->
+
+    https://www.php.net/manual/en/reserved.variables.php
