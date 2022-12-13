@@ -7,6 +7,9 @@
             PHP allows the type hint for the class properties and methods which ensures the 
             PHP will check the type of a value at the call time and throw a TypeError if there
             is a mismatch.
+
+            Type hints basically allows to specify the type for the function parameters and the
+            function return type.
             
             Syntax:
                 function function_name(type $param1, type $param2, ......)
