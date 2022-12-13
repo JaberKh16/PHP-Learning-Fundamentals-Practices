@@ -5,27 +5,30 @@
     </head>
 
     <body>
-        <!-- In PHP , Function Declaration can be done as following-
+        <!-- 
+            In PHP , Function Declaration can be done as following-
                 
                 Syntax:
                     // function definition 
-                    function funtion_name(){
+                    function funtion_name()
+                    {
 
                     }
                     // function calling
-                    function_name()
+                    function_name();
         -->
         <?php
             
             /* 
-                In , PHP function Duplication its not supported whether it's in
+                In , PHP function Duplication it's not supported whether it's in
                 same PHP Block or in different PHP Block, means
                 Function having same signature it's not supported in PHP.
             
             */
 
             // Function Declation -1
-            function print_something(){
+            function print_something()
+            {
                 echo "Ok, i am something! Why do you call";
             }
 
@@ -34,7 +37,8 @@
 
             # Here, this Duplication of Function will raise an error
             // Function Duplication in same PHP Block
-            function print_something(){
+            function print_something()
+            {
                 echo "Ok, i am something! Why do you call";
             }
             // Calling the Function
