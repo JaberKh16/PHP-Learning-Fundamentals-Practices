@@ -5,17 +5,20 @@
         public string $account_number;
         public string $account_holder_name;
         public float $balance;
-
+        
+        // constructor
         public function __construct($account_number, $account_holder_name, $balance){
             $this->account_number = $account_number;
             $this->account_holder_name = $account_holder_name;
             $this->balance = $balance;
         }
-
+        
+        // static method
         public static function account_information(){
             echo "Account Type: ".self::$account_type."<br>";
         }
-
+        
+        // default method
         public function check_deposit($amount){
             if($amount > 0){
                 $this->balance +=$amount;
