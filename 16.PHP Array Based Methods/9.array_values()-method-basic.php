@@ -2,8 +2,7 @@
     /*
         Array Method: array_values()
         ===========================
-        array_values() method is used to get the array values from 
-        the specified array.
+        array_values() method is used to get the array values from the specified array.
 
         Syntax:
             array_values($array_name);

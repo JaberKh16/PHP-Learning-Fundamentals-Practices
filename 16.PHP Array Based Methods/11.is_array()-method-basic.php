@@ -2,8 +2,7 @@
     /*
         Array Method: is_array()
         ========================
-        is_array() method is used to check whether the specified
-        variable is array or not and retuns a boolean.
+        is_array() method is used to check whether the specified variable is array or not and retuns a boolean.
         If is an array then returns 1, otherwise returns nothing.
 
         Syntax:

@@ -2,8 +2,7 @@
     /*
         Array Method: array_unshift()
         =============================
-        array_unshift() method is used to insert a item at the
-        begining of the array.
+        array_unshift() method is used to insert a item at the begining of the array.
 
         Syntax:
             array_unshift($array_name, value);

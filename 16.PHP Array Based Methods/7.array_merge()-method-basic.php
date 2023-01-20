@@ -2,9 +2,8 @@
     /*
         Array Method: array_merge()
         ===========================
-        array_merge() method is used to merge two arrays together
-        as a single entity and returns nothing so need to saved
-        the merged values into another array.
+        array_merge() method is used to merge two arrays together as a single entity and 
+        returns nothing so need to saved the merged values into another array.
 
         Syntax:
             array_merge($arr1, $arr2); // to merge '$arr1' with '$arr2'

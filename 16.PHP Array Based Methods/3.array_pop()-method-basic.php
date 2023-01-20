@@ -2,8 +2,7 @@
     /*
         Array Method: array_pop()
         =========================
-        array_pop() method is used to pop out a item at the
-        end of the array and returns the removed item.
+        array_pop() method is used to pop out a item at the end of the array and returns the removed item.
 
         Syntax:
             array_pop($array_name);

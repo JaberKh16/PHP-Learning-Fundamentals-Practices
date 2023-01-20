@@ -2,8 +2,7 @@
     /*
         Array Method: array_push()
         ==========================
-        array_push() method is used to push/append new item at the
-        end of the array.
+        array_push() method is used to push/append new item at the end of the array.
 
         Syntax:
             array_push($array_name, value);

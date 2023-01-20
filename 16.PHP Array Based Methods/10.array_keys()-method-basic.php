@@ -2,8 +2,7 @@
     /*
         Array Method: array_keys()
         ===========================
-        array_keys() method is used to get the array keys from 
-        the specified array.
+        array_keys() method is used to get the array keys from the specified array.
 
         Syntax:
             array_keys($array_name);

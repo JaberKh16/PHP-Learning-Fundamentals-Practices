@@ -2,8 +2,8 @@
     /*
         Array Method: array_search()
         ===========================
-        array_search() method is used to search a element and get its
-        index value if found out, otherwise returns nothing.
+        array_search() method is used to search a element and get its index value if found out, 
+        otherwise returns nothing.
 
         Syntax:
             array_search(element, $array_name);

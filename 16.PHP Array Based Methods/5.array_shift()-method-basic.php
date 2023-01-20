@@ -2,8 +2,7 @@
     /*
         Array Method: array_shift()
         ===========================
-        array_shift() method is used to pop out a item from the
-        begining of the array and returns the removed item.
+        array_shift() method is used to pop out a item from the begining of the array and returns the removed item.
 
         Syntax:
             array_shift($array_name);

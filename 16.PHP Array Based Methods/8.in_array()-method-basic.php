@@ -2,9 +2,8 @@
     /*
         Array Method: in_array()
         ========================
-        in_array() method is used to check whether the specified
-        element is exists in the array or not and retuns a boolean.
-        If exists then returns 1, otherwise returns nothing.
+        in_array() method is used to check whether the specified element is exists in the array 
+        or not and retuns a boolean. If exists then returns 1, otherwise returns nothing.
 
         Syntax:
             in_array(element, $array_name);
