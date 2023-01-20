@@ -48,5 +48,23 @@
         $nonhomogeneousArray = array(1, 'this', 6, 8.5, 20.4534, 'some');
         var_dump($nonhomogeneousArray);
     ?>
+    <?php
+        
+        function initializeArray()
+        {
+            $numbers = array(1, 4, 5, 7, 8, 10, 12, 15, 20);
+            printingArray($numbers);
+        }
+        
+        function printingArray($numbers)
+        {
+            echo "<pre>";
+            print_r($numbers);
+            echo "</pre>";
+        }
+
+        // calling the function
+        initializeArray();
+    ?>
 </body>
 </html>

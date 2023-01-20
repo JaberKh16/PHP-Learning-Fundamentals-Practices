@@ -18,6 +18,16 @@
         Syntax:
             $array_name[index_val];          // to get the specified index value element
             $array_name[index_val] = value ; // to get the specified index value element and assign with new value
+
+        To append the array 
+        -------------------
+        PHP will calculate the highest numerical index plus one each time you assign an element to the array.
+        For Example-
+
+
+                $numbers = [1, 2, 4, 5, 6]; // array having a length of 5 which means it has indexes from 0 to 4
+                $numbers[] = 10; // $numbers[4 + 1] where 4 is the highest index and plus 1 
+
     */
 ?>
 <!DOCTYPE html>
