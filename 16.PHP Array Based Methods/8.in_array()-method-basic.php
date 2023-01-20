@@ -7,6 +7,7 @@
 
         Syntax:
             in_array(element, $array_name);
+            
     */
 ?>
 <!DOCTYPE html>
