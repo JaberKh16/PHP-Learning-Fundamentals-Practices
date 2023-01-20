@@ -2,10 +2,12 @@
     /*
         Array Method: array_unshift()
         =============================
-        array_unshift() method is used to insert a item at the begining of the array.
+        array_unshift() method is used to insert a item at the begining of the array. 
 
         Syntax:
             array_unshift($array_name, value);
+
+        Note: array_unshift() method modifies the original array.
     */
 ?>
 <!DOCTYPE html>
@@ -33,6 +35,14 @@
         
         array_unshift($fruitItems, 'papaya');
         var_dump($fruitItems); // printing the array
+
+        echo "<br><br>";
+
+        // declaring another arrya
+        $fruitItems2 = array('lemon', 'jackfruit', 'woodapple');
+        array_unshift($fruitItems, $fruitItems2);
+        var_dump($fruitItems);
+        
     ?>
 </body>
 </html>
