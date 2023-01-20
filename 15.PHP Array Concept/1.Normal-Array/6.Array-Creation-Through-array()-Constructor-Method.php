@@ -50,9 +50,8 @@
     ?>
     <?php
         
-        function initializeArray()
+        function initializeArray($numbers)
         {
-            $numbers = array(1, 4, 5, 7, 8, 10, 12, 15, 20);
             printingArray($numbers);
         }
         
@@ -63,8 +62,26 @@
             echo "</pre>";
         }
 
-        // calling the function
-        initializeArray();
+        function gettingArrayLength($numbers)
+        {
+            return "Array length is: ". count($numbers). "<br>";
+        }
+
+        function unset4thValueOfArray($numbers)
+        {
+            // unsetting or removing 4th value
+            unset($numbers[4]);
+            echo "Removing 4th item from the array: "."<br>";
+            printingArray($numbers);
+        }
+
+        // declaring an array
+        $numbers = array(1, 4, 5, 7, 8, 10, 12, 15, 20);
+
+        // calling functions
+        initializeArray($numbers);
+        gettingArrayLength($numbers);
+        unset4thValueOfArray($numbers);
     ?>
 </body>
 </html>
