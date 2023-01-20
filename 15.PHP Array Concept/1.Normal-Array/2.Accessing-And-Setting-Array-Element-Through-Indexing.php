@@ -38,7 +38,7 @@
         echo "<br><br>";
 
         // accesing the 1st item
-        echo "1st Item is: ". $fruitItems[1]."<br>";
+        echo "1st Item is: ". $fruitItems[0]."<br>";
 
         // setting the 2nd item value to 'papaya'
         $fruitItems[2] = 'papaya';

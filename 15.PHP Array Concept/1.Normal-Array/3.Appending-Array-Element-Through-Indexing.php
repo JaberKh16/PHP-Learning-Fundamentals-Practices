@@ -41,6 +41,12 @@
         // appending new item value of 'papaya' to the end
         $fruitItems[] = 'papaya'; // appending throgh indexing
         var_dump($fruitItems);
+
+        echo "<br><br>";
+        
+        // appending another item
+        $fruitItems[6] = 'lemon';
+        var_dump(($fruitItems));    
     ?>
 </body>
 </html>
