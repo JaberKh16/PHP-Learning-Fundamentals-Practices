@@ -2,10 +2,8 @@
     /*
         Associative Array Concept
         =========================
-        In PHP, Associative Array is the array which is nothing
-        but the key/value pairs based array, where each items
-        have the specified key and those keys have their corresponding
-        value along with it.
+        In PHP, Associative Array is the array which is nothing but the key/value pairs based array, where each items
+        have the specified key and those keys have their corresponding value along with it.
 
         Syntax:
             $array_name = ['key1'=>'val1' , 'key2'=> 'val2', ... ];
@@ -14,8 +12,7 @@
         
         To acces the associative array
         ------------------------------
-        To access the associative array need to use the 'key' for 
-        getting the value for that corresponding key.
+        To access the associative array need to use the 'key' for getting the value for that corresponding key.
         
         Syntax:
             $array_name['key'];             // to get the specified 'key' value
@@ -56,6 +53,11 @@
         // setting 'agency' key value to 'Russian FSB'
         $agency_name = $person['agency'] = 'Russian FSB';
         echo "Agency Name: ".$agency_name."<br>";
+
+        echo "<br><br>";
+
+        echo "After changes array values are: "."<br";
+        var_dump($person);
     ?>
 </body>
 </html>

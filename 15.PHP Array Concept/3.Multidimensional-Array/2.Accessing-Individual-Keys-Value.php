@@ -2,15 +2,12 @@
     /*
         Multidimensional Array Concept
         ==============================
-        In PHP, Multidimensional Array is nothing but the consisting
-        of multiple arrays together as a single entity.
+        In PHP, Multidimensional Array is nothing but the consisting of multiple arrays together as a single entity.
 
-        This Multidimensional Array mostly concept can be used 
-        with database based working where you have to working 
+        This Multidimensional Array mostly concept can be used with database based working where you have to working 
         with multiple keys/values.
 
-        Multidimensional Arrays can be created through a collection of
-        Associative Arrays.
+        Multidimensional Arrays can be created through a collection of Associative Arrays.
 
         Syntax:
             $array_name = [
