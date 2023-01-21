@@ -17,9 +17,9 @@
 
     $statment->setFetchMode(PDO::FETCH_ASSOC);
     $products = $statment->fetchAll(PDO::FETCH_ASSOC);
-    echo "<pre>";
-    print_r($products);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($products);
+    // echo "</pre>";
 
 ?>
 

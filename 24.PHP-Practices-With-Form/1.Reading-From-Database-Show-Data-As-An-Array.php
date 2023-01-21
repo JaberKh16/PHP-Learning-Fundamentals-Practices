@@ -23,7 +23,7 @@
 
 ?>
 
-<table class="table">
+<!-- <table class="table">
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -36,11 +36,8 @@
     </tr>
   </thead>
   <tbody>
-    <!-- <h3>Product Information From Database</h3> -->
-  
-
    
   </tbody>
-</table>
+</table> -->
 </body>
 </html>
