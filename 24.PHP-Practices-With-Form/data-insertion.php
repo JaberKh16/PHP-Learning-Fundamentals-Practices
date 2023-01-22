@@ -1,16 +1,62 @@
+<?php
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+        // defining necessary variables for database configuration
+        $hostName = '127.0.0.1';
+        $portNo = '3312';
+        $dbName = 'Product_Information';
+        $userName = 'root';
+        $userPass = '';
+        // $PDOConnect = new PDO('mysql:host=localhost; port=3312; dbname=Product_Information', 'root', '');
+        
+        // set the DSN
+        $dsn = 'mysql:host='.$hostName.';port='.$portNo.';dbname='.$dbName; // enclose all the string parameters as ''
+        // connecting through PDO
+        $pdo = new PDO($dsn, $userName, $userPass);
+        // To handle if error occurs
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // getting database table variables
+        $productCode = $_POST['product_code'];
+        $productName = $_POST['product_name'];
+        $productType = $_POST['product_type'];
+        $productBarcode = $_POST['product_barcode'];
+        $productPrice = $_POST['product_price'];
+        $productStatus = $_POST['product_status'];
+        
+        // write the sql query for insertion
+        $sql_query = "INSERT INTO products_table (product_code, product_name, product_type, product_barcode, product_price, product_status) VALUES (:product_code, :product_name, :product_type, :product_barcode, :product_price, :product_status)";
+
+        // prepare the statement
+        $statement = $pdo->prepare($sql_query);
+
+        // bind those variables
+        $statement->bindParam(':product_code', $productCode);
+        $statement->bindParam(':product_name', $productName);
+        $statement->bindParam(':product_type', $productType);
+        $statement->bindParam(':product_barcode', $productBarcode);
+        $statement->bindParam(':product_price', $productPrice);
+        $statement->bindParam(':product_status', $productStatus);
+
+        // executing the query
+        $statement->execute();
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Use of "POST" Request</title>
+    <title>Use Of "POST" Request</title>
     <!-- Linking Bootstrap CDN  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 </head>
 <body>
-
-    <div class="container-fluid">
+<div class="container-fluid">
         <div class="row m-5">
         
 
