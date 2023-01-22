@@ -25,9 +25,11 @@
         // To handle if error occurs
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
-        // $statement = $pdo->prepare("INSERT INTO products_table (product_code, product_name, product_type, product_barcode, 
-        // product_price, product_status") VALUES (':');
+        // getting database table variables
+        $productCode = $_POST['']
+         
+        $statement = $pdo->prepare("INSERT INTO products_table (product_code, product_name, product_type, product_barcode, 
+        product_price, product_status") VALUES (':');
 
     ?>
 
