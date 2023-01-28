@@ -1,3 +1,35 @@
+<!--
+    Working With HTML Form Element With PHP
+    =======================================
+    Form element in HTML is basically used to get data from the users and then get submitted those
+    data to the database.
+
+    Typically, A Form supports different input type elements such as text, email, password, checkbox,
+    radio button, select, file upload etc,
+
+    Form Element Attributes
+    -----------------------
+    Form has two important attributes which are the following-
+        
+        1) action --   specifies the url which is being processed when the form is being submitted.
+        2) method --   specifies the HTTP method for submitting the form.There are many HTTP method
+                        such as GET, POST, PUT, REQUEST etc, GET is by default for form if the other
+                        method isn't been specified.
+
+
+    HTTP POST Method
+    ----------------
+    If a form uses the POST or GET method, the web browser will include the form data in the 
+    HTTP request's body. After submitting the form, you can access the form data via the 
+    associative array $_POST or $_GET in PHP Like the following-
+
+        // to check whether the $_POST has the 'empty' key
+        if(isset($_POST['email']){
+            var_dump($_POST['email']);
+        }
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
