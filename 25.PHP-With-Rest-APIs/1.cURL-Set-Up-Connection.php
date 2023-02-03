@@ -1,10 +1,11 @@
 <!--
-        PHP cURL Library Based Fundamentals
-        ===================================
+        PHP cURL Extension Based Fundamentals
+        =====================================
         cURL stands for 'Client URL Library' which is used to communicate with different servers
         while trying to get some data from the remote server. It also works with local server(means
-        local machine) to communicate between the files. It works on different networking protocols
-        such as HTTP, HTTPs, FTP, Proxy, Cookies etc.
+        local machine) to communicate between the files. It has a library named "libcurl" which works
+        behined the cURL extension to support different networking protocols such as HTTP, HTTPs, 
+        FTP, Proxy, Cookies, TELNET, FILE, LDAP, DICT, GOPHER etc.
 
         cURL Proposed Functions
         -----------------------
