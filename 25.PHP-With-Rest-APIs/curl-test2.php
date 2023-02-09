@@ -61,14 +61,15 @@
                                             "X-Goog-Api-Key: " . $api_key
                                         ));
 
-                                    $response = curl_exec($ch);
+                                        $response = curl_exec($ch);
 
                                     if (curl_errno($ch)) {
                                         echo "Error: " . curl_error($ch);
                                     } 
                                     else {
                                         var_dump($response);
-                                         if(isset($_POST['link'])){
+                                         if(isset($_POST['link']))
+                                         {
                                             $linkUrl = $_POST['link'];
                                             $customLink = $_POST['cust_link'];
                                              $domains = array();
@@ -85,8 +86,10 @@
                                                 }
                                             }
 
-                                        curl_close($ch);
+                                            curl_close($ch);
+                                        }
                                     }
+                                }
                                 ?>        
                                         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="">
   
