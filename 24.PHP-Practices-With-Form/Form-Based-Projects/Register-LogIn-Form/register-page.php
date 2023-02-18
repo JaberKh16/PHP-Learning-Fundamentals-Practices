@@ -33,7 +33,6 @@
 		<form class="form" method="POST" action="<?php echo $_SERVER['PHP_SELF']
 		 ?>">
 			<h2>
-
 				<i class="fa fa-user" aria-hidden="true"></i>
 				<h3>Sign-up</h3>
 			</h2>
