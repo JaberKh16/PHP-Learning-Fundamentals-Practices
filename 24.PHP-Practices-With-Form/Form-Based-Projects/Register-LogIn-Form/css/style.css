@@ -11,7 +11,7 @@ body {
 	/* padding: 20px; */
 	width: 35%;
 	position: absolute;
-	top: 4%;
+	top: 1%;
 	left: 35%;
 	border: none;
 }
@@ -20,7 +20,7 @@ body {
 	/* width: 200px; */
 	background-color: white;
 	padding: 30px 40px;
-	height: 530px;
+	height: 600px !important;
 	border-radius: 20px 20px;
 }
 

@@ -10,6 +10,9 @@
 <body>
 
 	<?php
+		// getting the operational functional directory files
+		include_once  '../operational-functions/insertNewUser.php';
+
 		if($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			// check if the 'btn-register' has been clicked
@@ -25,6 +28,10 @@
 				if(!empty($_POST['user_pass'])){
 					$userPassword = $_POST['user_pass']; 
 				}
+
+				// getting function call for insertion
+				insertNewUser($_POST);
+
 			}
 		}
 	?>
@@ -36,6 +43,20 @@
 				<i class="fa fa-user" aria-hidden="true"></i>
 				<h3>Sign-up</h3>
 			</h2>
+
+			<?php
+				if(isset($_POST['btn-register']))
+				{
+					if(!empty($userName) && !empty($userEmail) && !empty($userPassword)){
+						echo "<div class='alert alert-success'>Registration done successfully!</div>".'<br>';
+					} 
+				}
+			
+			?>
+			<!-- To show the registration successfull on success  -->
+			<div class="msg">
+
+			</div>
 			<label for="firstName">Name</label>
 			<input type="text" id="userFullName" placeholder="Enter name" class="userFullName" name="user_name"
 			value='<?php if($userName !=NULL) echo $userName; ?>'>
@@ -49,5 +70,11 @@
 			<div>Already a member? <a href="./index.php">Sign-in!</a></div>
 		</form>
 	</div>
+
+	<script>
+		function alertMessageOnSuccess(){
+
+		}
+	</script> 
 </body>
 </html>

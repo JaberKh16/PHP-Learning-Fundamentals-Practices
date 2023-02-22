@@ -8,8 +8,11 @@
         public string $userPass = "";
         public static string $conn;
 
-        function connectToDatabase($conn){
+        function __construct()
+        {
+            
             $conn =  new mysqli($this->serverName, $this->portNo, $this->dbName, $this->userName, $this->userPass);
+            echo $conn;
 
             if(!$conn){
                 die("Connection failed: ". mysqli_connect_error());
