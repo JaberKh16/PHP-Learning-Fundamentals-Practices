@@ -1,5 +1,6 @@
 <?php
 
+    // importing the database configuration
     require_once  '../config/db-config.php';
 
     function insertNewUser($newUserInformation)
