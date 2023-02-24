@@ -15,7 +15,8 @@
         var_dump($connection);
                 
         // insert the data
-        $insertion_query = "INSERT INTO `tbl_register` (user_name, user_email, user_pass) VALUES($registeredUserName, $registeredUserEmail, $registeredUserPass)";
+        $insertion_query = "INSERT INTO `tbl_register` (user_name, user_email, user_pass) 
+                            VALUES($registeredUserName, $registeredUserEmail, $registeredUserPass)";
         
 
 
