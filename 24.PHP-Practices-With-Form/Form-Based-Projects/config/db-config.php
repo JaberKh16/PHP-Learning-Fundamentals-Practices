@@ -9,7 +9,7 @@
         public $conn;
 
         public function __construct(){
-            $this->serverName = "localhost:3312";
+            $this->serverName = "localhost";
             $this->portNo = 3312;
             $this->dbName = "register_login";
             $this->userName = "root";
@@ -31,7 +31,8 @@
 
                 // creating database instance
                 $connection = new DatabaseConnect();
-                var_dump($connection);
+                // var_dump($connection);
+                // return $connection;
 
             }
         }

@@ -1,25 +1,26 @@
 <?php
 
-
+    
 
     function insertNewUser($newUserInformation, $dbConnected)
     {
         // getting and unpackt the information
-        $registeredUserName = $newUserInformation['user_name'];
-        $registeredUserPass  = $newUserInformation['user_pass'];
-        $registeredUserEmail = $newUserInformation['user_email'];
-
+        $registeredUserName = mysqli_real_escape_string($dbConnected,$newUserInformation['user_name']);
+        $registeredUserPass  = mysqli_real_escape_string($dbConnected,$newUserInformation['user_pass']);
+        $registeredUserPass = password_hash($registeredUserPass, PASSWORD_BCRYPT);
+        $registeredUserEmail = mysqli_real_escape_string($dbConnected,$newUserInformation['user_email']);
+        // echo $registeredUserName;
         
                 
         // insert the data
-        $insertion_query = "INSERT INTO `tbl_register` (user_name, user_email, user_pass) 
-                            VALUES($registeredUserName, $registeredUserEmail, $registeredUserPass)";
+        $insertion_query = "INSERT INTO tbl_register (user_name, user_email, user_pass) 
+                            VALUES('$registeredUserName', '$registeredUserEmail', '$registeredUserPass')";
         
-        
+
         
 
         // if the connection query is executed successfully
-        if($dbConnected->$insertion_query === TRUE){
+        if($dbConnected->query($insertion_query) == TRUE){
             echo "<script> alert('New record inserted successfully!');</script>";
         }
         else{

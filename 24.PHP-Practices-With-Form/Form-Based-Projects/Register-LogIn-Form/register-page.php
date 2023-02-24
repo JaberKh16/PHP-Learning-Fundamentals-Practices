@@ -11,13 +11,13 @@
 
 	<?php
 		// importing the database configuration
-		include_once '../config/db-config.php';
+		// include_once '../config/db-config.php';
 
 		// getting the operational functional directory files
 		include_once  '../operational-functions/insertNewUser.php';
 		
 
-		if($_SERVER["REQUEST_METHOD"] == "POST")
+		if($_SERVER["REQUEST_METHOD"] === "POST")
 		{
 			// check if the 'btn-register' has been clicked
 			if(isset($_POST['btn-register'])){
@@ -33,12 +33,15 @@
 					$userPassword = $_POST['user_pass']; 
 				}
 
-				// var_dump($connection->connectToDatabase());
-   				$dbConnected = $connection->connectToDatabase($connection);
+				// // var_dump($connection->connectToDatabase());
+   				// $dbConnected = $connection->connectToDatabase($connection);
     			// var_dump($dbConnected);
+				$dbConnected = new mysqli("localhost", "root", "", "register_login");
+				if(!empty($dbConnected)){
+					// getting function call for insertion
+					insertNewUser($_POST, $dbConnected);
+				}
 
-				// getting function call for insertion
-				insertNewUser($_POST, $dbConnected);
 
 			}
 		}
@@ -53,12 +56,12 @@
 			</h2>
 
 			<?php
-				if(isset($_POST['btn-register']))
-				{
-					if(!empty($userName) && !empty($userEmail) && !empty($userPassword)){
-						echo "<div class='alert alert-success'>Registration done successfully!</div>".'<br>';
-					} 
-				}
+				// if(isset($_POST['btn-register']))
+				// {
+				// 	if(!empty($userName) && !empty($userEmail) && !empty($userPassword)){
+				// 		echo "<div class='alert alert-success'>Registration done successfully!</div>".'<br>';
+				// 	} 
+				// }
 			
 			?>
 			<!-- To show the registration successfull on success  -->
@@ -67,13 +70,13 @@
 			</div>
 			<label for="firstName">Name</label>
 			<input type="text" id="userFullName" placeholder="Enter name" class="userFullName" name="user_name"
-			value='<?php if($userName !=NULL) echo $userName; ?>'>
+			value='<?php if(!empty($userName)) echo $userName; ?>'>
 			<label for="userEmail">Email</label>
 			<input type="email" id="userEmail" placeholder="Enter email" class="userEmail" name="user_email"
-			value='<?php if($userEmail !=NULL) echo $userEmail; ?>'>
+			value='<?php if(!empty($userEmail)) echo $userEmail; ?>'>
 			<label for="userPassword">Password</label>
 			<input type="password" id="userPassword" placeholder="Enter password" class="userPassword" name="user_pass"
-			value='<?php if($userPassword !=NULL) echo $userPassword; ?>'>
+			value='<?php if(!empty($userPassword)) echo $userPassword; ?>'>
 			<button class="btn" name="btn-register">Register</button>
 			<div>Already a member? <a href="./index.php">Sign-in!</a></div>
 		</form>
