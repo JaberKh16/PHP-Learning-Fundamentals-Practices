@@ -10,10 +10,14 @@
 <body>
 
 	<?php
+		// importing the database configuration
+		include_once '../config/db-config.php';
+
 		// getting the operational functional directory files
 		include_once  '../operational-functions/insertNewUser.php';
+		
 
-		if($_SERVER['REQUEST_METHOD'] == 'POST')
+		if($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			// check if the 'btn-register' has been clicked
 			if(isset($_POST['btn-register'])){
@@ -29,8 +33,12 @@
 					$userPassword = $_POST['user_pass']; 
 				}
 
+				// var_dump($connection->connectToDatabase());
+   				$dbConnected = $connection->connectToDatabase($connection);
+    			// var_dump($dbConnected);
+
 				// getting function call for insertion
-				insertNewUser($_POST);
+				insertNewUser($_POST, $dbConnected);
 
 			}
 		}
