@@ -128,3 +128,8 @@ input:focus {
 	padding: 5px 0px;
 	border-bottom: 2px solid #2870ce;
 }
+
+.alert{
+	background-color: #d49694;
+	color: #fff !important;
+}

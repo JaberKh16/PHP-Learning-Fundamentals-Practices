@@ -9,12 +9,13 @@
         $registeredUserPass  = mysqli_real_escape_string($dbConnected,$newUserInformation['user_pass']);
         $registeredUserPass = password_hash($registeredUserPass, PASSWORD_BCRYPT);
         $registeredUserEmail = mysqli_real_escape_string($dbConnected,$newUserInformation['user_email']);
-        // echo $registeredUserName;
+        $createdTime = date('Y-m-d H:i:s');
+
         
                 
         // insert the data
-        $insertion_query = "INSERT INTO tbl_register (user_name, user_email, user_pass) 
-                            VALUES('$registeredUserName', '$registeredUserEmail', '$registeredUserPass')";
+        $insertion_query = "INSERT INTO tbl_register (user_name, user_email, user_pass, created_time) 
+                            VALUES('$registeredUserName', '$registeredUserEmail', '$registeredUserPass', '$createdTime')";
         
 
         
