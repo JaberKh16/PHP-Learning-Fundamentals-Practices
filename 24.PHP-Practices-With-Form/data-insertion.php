@@ -24,9 +24,10 @@
         $productBarcode = $_POST['product_barcode'];
         $productPrice = $_POST['product_price'];
         $productStatus = $_POST['product_status'];
+        $createdTime = date('Y-m-d H:i:s');
         
         // write the sql query for insertion
-        $sql_query = "INSERT INTO products_table (product_code, product_name, product_type, product_barcode, product_price, product_status) VALUES (:product_code, :product_name, :product_type, :product_barcode, :product_price, :product_status)";
+        $sql_query = "INSERT INTO products_table (product_code, product_name, product_type, product_barcode, product_price, product_status, created_time) VALUES (:product_code, :product_name, :product_type, :product_barcode, :product_price, :product_status, ':created_time')";
 
         // prepare the statement
         $statement = $pdo->prepare($sql_query);
@@ -38,6 +39,7 @@
         $statement->bindParam(':product_barcode', $productBarcode);
         $statement->bindParam(':product_price', $productPrice);
         $statement->bindParam(':product_status', $productStatus);
+        $statement->bindParam(':created_time', $createdTime);
 
         // executing the query
         $statement->execute();
