@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>isset() Method</title>
+    <title>empty() Method</title>
 </head>
 <body>
     <?php
