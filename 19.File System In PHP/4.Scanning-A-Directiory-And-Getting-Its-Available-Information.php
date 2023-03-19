@@ -2,6 +2,7 @@
     /*
         Scanning A Directory Example
         ============================
+        scandir(path) function is used to get the specified path files or directories.
 
     */
 ?>
