@@ -23,7 +23,7 @@
     // SMTP username for the particular email is the email address
     $mailer->Username = "mkhan161188@bscse.uiu.ac.bd";
     // SMTP password for the particular email is the pass which was automatically generated when setup smtp
-    $mailer->Password = "qxsgubhgzpvvgnwb";
+    $mailer->Password = "enter your SMTP password";
     // set the encryption to be SMTP encryption
     $mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     // SMTP encryption port is 465 
