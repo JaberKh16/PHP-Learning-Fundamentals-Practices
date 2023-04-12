@@ -1,0 +1,299 @@
+
+
+<div class="container">
+<div class="row">
+    <div class="col-12 col-md-12 col-sm-6">
+        <!-- Attendacne Card Info Fields-->
+        <div class="card">
+            <div class="card-body">
+                <!--<h4 class="card-title mb-5">DSR Information Fields</h4>-->
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group mb-3">
+                                <form id="photoForm1" method="POST">
+                                    <label class="form-label text-dark" for="dsrELNumber">EL Number</label>
+                                    <input class="form-control" id="dsrELNumber" type="number" name="dsr_el_number" 
+                                    placeholder="Enter Your EL Number" value="<?php if(!empty($_POST['dsr_el_number'])) echo $_POST['dsr_el_number']; ?>">
+                                    <input type="hidden" name="photo" id="photoFormInputField">
+                                    <!--<button type="submit" class="btn btn-primary ps-3 pe-3 mt-2 mb-2" name="submitEL">Submit</button>-->
+                                 </form>
+                            </div>
+                               
+                            <div class="form-group mb-3">
+                                <div class="dropdown videoInsertedCardSection">
+                                    <!--<div>-->
+                                    <!--    <label for="dropdown" class="text-dark">Take Selfie</label>-->
+                                    <!--    <input type="file" accept="image/*" id="photoInput">-->
+                                    <!--     <button onclick="getLocation()" id="submitBtn">Submit</button>-->
+                                    <!--    <canvas id="canvas"></canvas>-->
+                                    <!--</div>-->
+                                    <!--Get Locational Info Related Working Elements -->
+                                    <!--<button class="btn btn-success ps-3 pe-3" id="submitBtn">Get Location</button>-->
+                                    <!--<p class="text-dark m-3">Your location is: <span id="locationInfo"></span></p>-->
+                                    
+                                    <!--Get Open Camera Related Working Elements-->
+                                    <button class= "btn btn-danger ps-3 pe-3 mt-2 mb-2" id="openCameraButton">Open Camera</button>
+                               
+                                    <p id="latitude"> </p>
+                                    <?php
+                            $location = $_POST['locationInfo'];
+                            var_dump($location['latitude'], $location['longitude']);
+                        ?>
+                                </div>
+                            </div>
+            
+                        </div>
+                      
+                        
+                     
+                        
+                        <!--<div class="col-lg-12 col-md-12">-->
+                        <!--    <button class= "btn btn-danger ps-3 pe-3 m-2" id="openCameraButton">Open Camera</button>-->
+                        <!--    <canvas id="canvas"></canvas>-->
+                        <!--    <form id="photoForm" action="#">-->
+                        <!--        <input type="hidden" name="photo" id="photoInput">-->
+                        <!--        <button type="submit" class="btn btn-primary ps-3 pe-3 m-2">Submit Photo</button>-->
+                        <!--    </form>-->
+                        <!--</div>-->
+                    </div>
+                   
+                  
+                       
+                </div>
+            </div>
+        </div>
+        <!-- Attendacne Card Info Fields-->
+    </div>
+</div>
+
+<script src="./scripts/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+    
+    $("#openCameraButton").on('click', function(){
+        const latitude = 0.0;
+        const longitude = 0.0;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position)
+            {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                console.log(latitude);
+                console.log(longitude);
+                    
+                const locationInfo = {
+                    'latitude': latitude,
+                    'longitude': longitude
+                }
+
+                $.ajax({
+                    url: "./operational-functions/test-ajax.php",
+                    type: "POST",
+                    data: {
+                        'locationInfo': locationInfo
+                    },
+                    success: function(response){
+                        console.log(response);
+                        $("#latitude").html(response);
+                    }
+                })
+
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    });
+   
+        
+});
+
+
+</script>
+<!--Linking External JS File-->
+<script>
+    // // get the required elements 
+    // const openCameraButton = document.getElementById("openCameraButton");
+    // const canvas = document.getElementById("canvas");
+    // const photoForm = document.getElementById("photoForm");
+    // const photoFormInputField = document.getElementById("photoFormInputField");
+    // // get the element where want to append the created video element
+    // const videoInsertedCardSection = document.getElementsByClassName("videoInsertedCardSection")[0].lastElementChild;
+              
+    // openCameraButton.addEventListener('click', () => {
+    //     // get user media data for video only
+    //     navigator.mediaDevices.getUserMedia({ video: true })
+    //         .then(stream => {
+    //             // creating the video element
+    //             const videoElement = document.createElement("video");
+    //             const videoElementClassesProp = ["mt-2", "mb-2", "border", "w-100"];
+                    
+                    
+    //             // set the properties for the video element
+    //             videoElement.srcObject = stream;
+    //             videoElement.autoplay = true;
+    //             videoElement.classList.add(...videoElementClassesProp);
+                    
+    //             // appending the video element into the card section
+    //             videoInsertedCardSection.appendChild(videoElement);
+                    
+                    
+    //             // setup the canvas frame 
+    //             const canvasContext = canvas.getContext("2d");
+    //             canvasContext.canvas.width = videoElement.videoWidth;
+    //             canvasContext.canvas.height = videoElement.videoHeight;
+                    
+                    
+    //             // create a button to capture  
+    //             const captureButton = document.createElement("button");
+    //             const classesBtn = ["btn", "btn-success", "text-white", "ps-3", "pe-4", "mt-5", "mb-5"];
+                    
+    //             /// set the properties
+    //             captureButton.textContent = "Capture";
+    //             captureButton.classList.add(...classesBtn); 
+    //             // canvasContext.appendChild(photoForm);
+            
+    //             photoForm.appendChild(captureButton);
+                    
+    //             captureButton.addEventListener('click', () => {
+    //                 canvasContext.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+    //                 photoFormInputField.value = canvas.toDataURL();
+    //                 console.log(photoFormInputField.value)
+    //                 photoForm.style.display = "block";
+    //                 videoElement.pause();
+    //                 stream.getTracks().forEach(track => track.stop());
+
+                    
+    //             });
+    //         })
+    //         .catch(error => {
+    //             console.error("Error accessing camera", error);
+    //         });
+    // });
+</script>
+
+
+
+<script>
+    // if (navigator.geolocation) {
+    //     navigator.geolocation.getCurrentPosition(function(position){
+    //         const latitude = position.coords.latitude;
+    //         const longitude = position.coords.longitude;
+    //         console.log(latitude);
+    //         console.log(longitude);
+    //                 // let locationElement = document.getElementById("locationInfo");
+    //                 // locationElement.innerHTML = "Latitude: " + lat + ", Longitude: " + lon;
+    //                 // console.log(locationElement.outerHTML); // prints HTML tag to console
+    //         const locationInfo = {
+    //             'latitude': latitude,
+    //             'longitude': longitude
+    //         }
+    //         // convert the object to a json string
+    //         const locationInfoJSON = JSON.stringify(locationInfo);
+                    
+    //         // Create an AJAX request object
+    //         const xhttp = new XMLHttpRequest();
+                    
+    //         // Define the PHP file and HTTP method
+    //         xhttp.open("POST", "./operational-functions/test-ajax.php", true);
+                    
+    //         // Set the content type header
+    //         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    
+    //         // Send the data to PHP
+    //         xhttp.send("locationInfo=" + locationInfoJSON); 
+    //     });
+    // } else {
+    //     alert("Geolocation is not supported by this browser.");
+    // }
+        
+        // function showPosition(position) {
+        //     const latitude = position.coords.latitude;
+        //     const longitude = position.coords.longitude;
+        //     // let locationElement = document.getElementById("locationInfo");
+        //     // locationElement.innerHTML = "Latitude: " + lat + ", Longitude: " + lon;
+        //     // console.log(locationElement.outerHTML); // prints HTML tag to console
+        //     const locationInfo = {
+        //         'latitude': latitude,
+        //         'longitude': longitude
+        //     }
+        //     // convert the object to a json string
+        //     const locationInfoJSON = JSON.stringify(locationInfo);
+            
+        //     // Create an AJAX request object
+        //     const xhttp = new XMLHttpRequest();
+            
+        //     // Define the PHP file and HTTP method
+        //     xhttp.open("POST", "./collect-dsrs-attendance.php", true);
+            
+        //     // Set the content type header
+        //     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            
+        //     // Send the data to PHP
+        //     xhttp.send("locationInfo=" + locationInfoJSON);
+                        
+        // }
+</script>
+
+<script>
+//     if (navigator.geolocation) {
+//       navigator.geolocation.getCurrentPosition(function(position) {
+//             var latitude = position.coords.latitude;
+//             var longitude = position.coords.longitude
+//             var locationInfo = { latitude: latitude, longitude: longitude };
+//             console.log(latitude);
+//             console.log(longitude);
+//             // Pass the latitude and longitude values to the PHP file using jQuery's AJAX method
+//             $.ajax({
+//             //   url: "./collect-dsrs-attendance.php",
+//               type: "GET",
+//               data: locationInfo,
+//               success: function(response) {
+//                 // Handle the response from the PHP file
+//                 console.log(response);
+//               }
+//             });
+//         });
+//     } 
+//     else {
+//         // Geolocation is not supported by the browser
+//     }
+</script> 
+
+
+<!--    <script>-->
+<!--        const photoInput = document.getElementById('photoInput');-->
+<!--        const submitBtn = document.getElementById('submitBtn');-->
+<!--        const canvas = document.getElementById('canvas');-->
+<!--        const context = canvas.getContext('2d');-->
+        
+<!--        photoInput.addEventListener('change', handlePhotoInput);-->
+<!--        submitBtn.addEventListener('click', submitPhoto);-->
+        
+<!--        function handlePhotoInput(event) {-->
+<!--          const file = event.target.files[0];-->
+<!--          const reader = new FileReader();-->
+<!--          reader.readAsDataURL(file);-->
+<!--          reader.onload = function(event) {-->
+<!--            const img = new Image();-->
+<!--            img.onload = function() {-->
+<!--              canvas.width = img.width;-->
+<!--              canvas.height = img.height;-->
+<!--              context.drawImage(img, 0, 0);-->
+<!--            }-->
+<!--            img.src = event.target.result;-->
+<!--          }-->
+<!--        }-->
+    
+<!--        function submitPhoto() {-->
+<!--          const dataURL = canvas.toDataURL();-->
+          
+<!--        }-->
+<!--</script>-->
+   
+    
+   
+</div>        
+    
+  </body>
+</html>
