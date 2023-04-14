@@ -19,7 +19,7 @@
     {
         // escaping the variables using htmlspecialchars() method
         $userName = htmlspecialchars($_GET['user_name']);
-        $userName = htmlspecialchars($_GET['user_email']);
+        $userEmail = htmlspecialchars($_GET['user_email']);
 
         print "Thank you $userName for your subscription.<br>";
         print "Please check your email and confirm it in your inbox of the email $userEmail.";
