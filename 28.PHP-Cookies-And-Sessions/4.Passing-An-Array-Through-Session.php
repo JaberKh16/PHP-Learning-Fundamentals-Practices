@@ -59,7 +59,7 @@
         }
 
     ?>
-
+    // alert the script
     <script> 
         alert(document.cookie);
     </script>
