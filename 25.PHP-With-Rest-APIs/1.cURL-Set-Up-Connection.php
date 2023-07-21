@@ -41,7 +41,8 @@
             6) CURLOPT_CUSTOMREQUEST -- to tell the server what type of HTTP request you are sending
             7) CURLOPT_HTTPHEADER -- to tell the server about the HTTP headers information.
             8) CURLOPT_PORT - to the alternative port when working with different protocols.
-
+            9) CURLOPT_HEADER - to get the header related information. Takes boolean value as parameter.
+  
 
         Syntax For The curl_setopt() Function
         -------------------------------------
@@ -69,6 +70,17 @@
                                                                 shown in the browser when response being returned. By default
                                                                 it is 'false'.
         e) curl_setopt($curl, CURLOPT_HTTPHEADER, $header) --  '$header' is used to set the HTTP header information.
+
+
+
+        cURL curl_getinfo() Function Available Options
+        ==============================================
+        Some of the curl_getingo() function parameters to determine the server what needs to be get from
+        server when request is fullfiled, which are the following-
+
+            1) CURLINFO_HTTP_CODE - to get the http status code info
+            2) CURLINFO_CONTENT_TYPE - to get the response content type info
+            3) CURLINFO_CONTENT_LENGTH_DOWNLOAD - to get the response content total length or size.
 
                                                             
 -->

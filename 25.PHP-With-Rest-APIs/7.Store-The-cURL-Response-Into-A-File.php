@@ -40,7 +40,8 @@
     // set the file pointer
     $path = __DIR__."/files/sample.txt";    
     $file = fopen($path, 'w'); // open file pointer as writing and appending 'w+' mode
-    // calling the function
+    
+    // get the response
     getResponse($url, $file);
 
 

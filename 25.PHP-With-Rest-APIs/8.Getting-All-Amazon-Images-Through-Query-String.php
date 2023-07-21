@@ -27,9 +27,13 @@
             print_r($error);
         }
         else{
-            $response = curl_exec($curl);
-            var_dump($response);
-            // preg_match_all();
+            // get the status code
+            $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            if($statusCode != 200){
+                $response = curl_exec($curl);
+                var_dump($response);
+                // preg_match_all();
+            }
         }
     }
 

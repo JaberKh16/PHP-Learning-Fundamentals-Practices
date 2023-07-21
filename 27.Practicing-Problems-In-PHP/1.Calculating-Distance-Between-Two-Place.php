@@ -24,13 +24,13 @@
     <?php
         // gets two places longitude
         $placeA = [
-            'longitude' => 13.404954,
-            'latitude' => 52.520008
+            'longitude' => 23.7465,
+            'latitude' => 90.376
         ];
         // gets two places latitude
         $placeB = [
-            'longitude' => 23.777176,
-            'latitude' => 90.399452
+            'longitude' => 23.7502,
+            'latitude' => 90.4004
         ];
 
 

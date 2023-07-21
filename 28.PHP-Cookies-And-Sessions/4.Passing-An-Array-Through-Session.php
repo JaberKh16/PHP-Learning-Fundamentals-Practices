@@ -54,8 +54,8 @@
         // set the session key with its value
         $_SESSION[$sessionKey] = $sessionValue;
 
-        foreach($_SESSION[$sessionKey] as key=>value){
-            
+        foreach($_SESSION[$sessionKey] as $key=>$value){
+            print_r($value);
         }
 
     ?>

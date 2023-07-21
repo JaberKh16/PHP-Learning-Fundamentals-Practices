@@ -44,11 +44,6 @@
 <body>
     <?php
 
-
-        // set the session key value
-        $sessionKey = "Browser";
-        $sessionValue = "Chrome V8.0";
-
         function sessionStart($lifetime, $path, $domain, $secure, $httpOnly)
         {
             // start the session 
@@ -59,11 +54,20 @@
         sessionStart(0, '/', 'localhost', false, true);
 
         // set the session 
-        functon setSessionValue($sessionKey, $sessionValue)
+        function setSessionValue($sessionKey, $sessionValue)
         {
-            $_SESSION[$sessionKey] = $sessionValue; 
+            $_SESSION[$sessionKey] = $sessionValue;
+            return $_SESSION[$sessionKey];
         }
-        setSessionValue($sessionKey, $sessionValue);
+
+        global $sessionKey;
+        global $sessionValue;
+        // set the session key value
+        $sessionKey = "Browser";
+        $sessionValue = "Chrome V8.0";
+
+        $result = setSessionValue($sessionKey, $sessionValue);
+        var_dump($result);
     ?>
 
     <script> 
