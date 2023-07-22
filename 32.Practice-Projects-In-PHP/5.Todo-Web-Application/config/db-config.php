@@ -11,7 +11,7 @@
         $pdo_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         if($pdo_conn != NULL){
-            echo "Database ".DB_NAME." is connected.".'<br>';
+            // echo "Database ".DB_NAME." is connected.".'<br>';
         }
     }catch(PDOException $exception){
         echo 'Error: '. $exception->getMessage();

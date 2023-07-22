@@ -1,6 +1,10 @@
 <?php
     session_start();
 
+    // required db file
+    require_once "./config/db-config.php";
+    
+
     $actual_email = "md.jaberkhan66@gmail.com";
     $actual_pass = "1234@@";
 

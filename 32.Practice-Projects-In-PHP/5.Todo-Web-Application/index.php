@@ -44,12 +44,12 @@
 										<span class="checkmark"></span>
 									</label>
 								</div>
-								<!-- <div class="w-50 text-md-right">
-									<a href="#">Forgot Password</a>
-								</div> -->
 							</div>
 							<div class="form-group mt-5">
 								<button type="submit" class="btn btn-primary d-block rounded submit px-5" name="btn_login">Login</button>
+							</div>
+							<div class="w-100 d-block text-md-right">
+								<p class="text-dark">Not registered yet? <a href="./sign-up.php" class="text-primary">Sign-up</a>
 							</div>
 						</form>
 	        		</div>
