@@ -30,7 +30,7 @@
 							<span class="fa fa-user-o"></span>
 						</div>
 						<h3 class="text-center mb-4">Login</h3>
-						<form action="./validate-login.php" class="login-form" method="POST">
+						<form action="./validate-login.php" class="login-form" method="GET">
 							<div class="form-group">
 								<input type="email" class="form-control rounded-left" name="user_email" placeholder="Email" required>
 							</div>
