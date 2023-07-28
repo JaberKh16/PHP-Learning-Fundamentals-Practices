@@ -3,19 +3,10 @@
 
     // required db file
     require_once "./config/config.php";
- 
-
-    // $actual_email = "md.jaberkhan66@gmail.com";
-    // $actual_pass = "1234@@";
-
-
-    // $actual_email = "md.jaberkhan66@gmail.com";
-    // $actual_pass = "1234@@";
 
 
 
     if(!isset($_POST['btn_login'])){
-        echo 2;
         
         // get input values from form
         $inputted_email = $_GET['user_email'];
@@ -49,7 +40,10 @@
 
         
         if($inputed_pass == $user_pass && $user_email == $inputted_email){
-            // header("Location: ./todo-app.php");
+            header("Location: ./todo-app.php");
+        }else{
+            echo "<div class='alert alert-danger'><strong>Wrong Credentials, Try Again</strong></div>";
+            header("Location: ./index.php");
         }
        
 

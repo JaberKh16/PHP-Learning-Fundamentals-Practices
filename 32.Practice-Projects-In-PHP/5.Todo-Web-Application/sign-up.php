@@ -52,11 +52,16 @@
                 // echo "<div class='alert alert-success'><strong>$msg</strong></div>";
                 $_SESSION['user_email'] = $email;
                 $_SESSION['user_name'] = $name;
+                echo "
+                    <script>alert('Redirecting to login page');</script>
+                    <script>location.href = './index.php'; </script>
+                    ";
+                // header("Location: ./sign-up.php?message='.$msg.'");
             }else{
                 $msg = "Register again.";
             }
             
-            header("Location: ./index.php?message='.$msg.'");
+            
         
         }
     ?>

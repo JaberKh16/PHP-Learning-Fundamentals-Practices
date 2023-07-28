@@ -18,11 +18,63 @@
 <body>
 	<section class="ftco-section">
 		<div class="container">
-			<!-- <div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-1">
-					<h2 class="heading-section">Login</h2>
-				</div>
-			</div> -->
+
+		<?php
+			session_start();
+
+			// required db file
+			require_once "./config/config.php";
+
+
+
+			if(!isset($_POST['btn_login'])){
+				
+				// get input values from form
+				$inputted_email = $_GET['user_email'];
+				$inputed_pass = $_GET['user_pass'];
+
+				// Choose a hashing algorithm (e.g., SHA-256)
+				$hashAlgorithm = "sha256";
+				$salt = "jk122";
+				$inputed_pass = hash($hashAlgorithm, $inputed_pass.$salt);
+				
+				
+				$flag = 0; 
+				// $retun_val = password_verify($inputed_pass, $hashed_password);
+				// $retun_val = substr($inputed_pass, $hashed_password);
+
+				
+				//sql query
+				$sql_query = "SELECT * FROM `tbl_users` WHERE user_email = '$inputted_email'";
+
+				// execute the query 
+				$statement = $conn->query($sql_query);
+
+				// get the data
+				$user_records = $statement->fetch_assoc();
+
+
+				$user_name = $user_records['user_name'];
+				$user_email = $user_records['user_email'];
+				$user_pass = $user_records['user_password'];
+
+				
+				$msg = NULL;
+				
+				if($inputed_pass == $user_pass && $user_email == $inputted_email){
+					$msg = "Successfully Login";
+					header("Location: ./todo-app.php");
+				}else{
+					$msg = "<div class='alert alert-danger'><strong>Wrong Credentials, Try Again</strong></div>";
+				}
+			
+
+
+				
+			}
+		?>
+
+
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-lg-5">
 					<div class="login-wrap p-4 p-md-5">
@@ -30,21 +82,19 @@
 							<span class="fa fa-user-o"></span>
 						</div>
 						<h3 class="text-center mb-4">Login</h3>
-						<form action="./validate-login.php" class="login-form" method="GET">
+						<?php
+							if($msg != NULL){
+								echo $msg;
+							}
+						?>
+						<form action="./index.php" class="login-form" method="GET">
 							<div class="form-group">
 								<input type="email" class="form-control rounded-left" name="user_email" placeholder="Email" required>
 							</div>
 							<div class="form-group d-flex">
 							<input type="password" class="form-control rounded-left" name="user_pass" placeholder="Password" required>
 							</div>
-							<!-- <div class="form-group d-md-flex">
-								<div class="w-50">
-									<label class="checkbox-wrap checkbox-primary">Remember Me
-										<input type="checkbox" value="1" name="remember_me">
-										<span class="checkmark"></span>
-									</label>
-								</div>
-							</div> -->
+
 							<div class="form-group mt-5">
 								<button type="submit" class="btn btn-primary d-block rounded submit px-5" name="btn_login">Login</button>
 							</div>
