@@ -61,8 +61,11 @@
 				
 				$msg = NULL;
 				
+				
 				if($inputed_pass == $user_pass && $user_email == $inputted_email){
 					$msg = "Successfully Login";
+					$_SESSION['user_email'] = $user_email;
+					$_SESSION['user_name'] = $user_name;
 					header("Location: ./todo-app.php");
 				}else{
 					$msg = "<div class='alert alert-danger'><strong>Wrong Credentials, Try Again</strong></div>";

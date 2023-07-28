@@ -4,8 +4,8 @@
     session_unset();
 
     // delete the cookie also
-    if(isset($_COOKIE['email'])){
-        setcookie('email', $user_email, time() - 1);
+    if(isset($_COOKIE['user_email'])){
+        setcookie('user_email', $user_email, time() - 1);
     }
     
 

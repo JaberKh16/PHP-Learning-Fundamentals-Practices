@@ -13,15 +13,32 @@
     
 </head>
 <body>
+        <?php
+            session_start();
+            if(empty($_SESSION['user_email'])){
+                header("Location: ./index.php");
+            }
+            $user_email = $_SESSION['user_email'];
+        ?>
+
+   
     <div class="container">
         <div class="row d-flex justify-content-center container">
         <div class="col-md-8">
             <div class="card-hover-shadow-2x mb-3 card">
-            <div class="card-header-tab card-header">
-            <!-- Task List Icon -->
-            <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
-                class="fa fa-tasks"></i>&nbsp;Task Lists</div>
-            </div>
+                <div class="card-header-tab card-header d-flex justify-content-between">
+                    <!-- Task List Icon -->
+                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                        <i class="fa fa-tasks"></i>&nbsp;Task Lists
+                    </div>
+                    <a href="./logout.php" type="submit" class="btn btn-primary d-flex justify-content-end rounded submit px-3" name="btn_logout">Login</a>
+                </div>
+
+            
+
+            
+
+            
 
 
             <!-- Scrollbar Div -->
@@ -67,7 +84,7 @@
                                 <div class="widget-heading">Call Sam For payments 
                                     <div class="badge badge-danger ml-2">Rejected</div>
                                 </div>
-                                <div class="widget-subheading"><i>By Bob</i></div>
+                                <div class="widget-subheading"><i>By <?php echo $user_email; ?></i></div>
                             </div>
                             <div class="widget-content-right">
                                 <button class="border-0 btn-transition btn btn-outline-success">
