@@ -2,9 +2,8 @@
     session_start();
 
     // required db file
-    require_once "./config/db-config.php";
-    
-    
+    require_once "./config/config.php";
+ 
 
     // $actual_email = "md.jaberkhan66@gmail.com";
     // $actual_pass = "1234@@";
@@ -13,58 +12,55 @@
     // $actual_email = "md.jaberkhan66@gmail.com";
     // $actual_pass = "1234@@";
 
-    if(isset($_POST['btn_login'])){
+    echo $_SESSION['user_email'];
+
+    if(!isset($_POST['btn_login'])){
+        echo 2;
         // get input values from form
-        $user_email = $_GET['user_email'];
+        $inputted_email = $_GET['user_email'];
         $inputed_pass = $_GET['user_pass'];
-        var_dump($user_email);
+        
 
         // To compare hash with plain text, use
         $flag = 0; 
-        $retun_val = password_verify("$inputed", $hashed_password);
+        // $retun_val = password_verify($inputed_pass, $hashed_password);
+        // $retun_val = substr($inputed_pass, $hashed_password);
 
-        if($flag == $retun_val){
-             //sql query
-        $sql_query = "SELECT * FROM tbl_users WHERE user_email = '$user_email' AND user_pass = '$user_pass'";
+        var_dump($return_val);
+
+
+
+        
+        //sql query
+        $sql_query = "SELECT * FROM tbl_users WHERE user_email = '$inputted_email'";
+
+
 
         // execute the query 
-        $statement = $conn->query($sql_query);
+        $statement = mysqli_query($conn,$sql_query);
+
+        // get the data
+        $user_records = $statement->fetch_assoc();
+        // var_dump($user_records);
+
+        $user_name = $user_records['user_name'];
+        $user_email = $user_records['user_email'];
+        $user_pass = $user_records['user_password'];
+
+
+        
+        if(password_verify($inputed_pass, $hashed_password)){
+            echo 1;
+        }
+
+
 
 
         // $user_data = $statement->execute();
 
 
 
-        if($user_data = $statement->fetch_assoc()){
-            
-            if($user_data !=NULL){
-                echo 1;
-                foreach($user_data as $data){
-                    var_dump($user_data);
-                    $user_email = $user_data['user_email'];
-                    $user_pass = $user_data['user_pass'];
-
-                    if()
-                }
-    
-                $_SESSION['user_email'] = $user_email;
-                // header('Location: ./todo-app.php');
-                $path = "./todp-app.php";
-                echo "<script>alert('login successful.');</script>";
-                echo "<script>location.href = '$path'</script>";
-            }else{
-                echo "<div class='alert alert-warning'>No data found</div>";
-                $path = "./inedx.php";
-                echo "<script>alert('login again.');</script>";
-                echo "<script>location.href = '$path'</script>"; 
-            }
-            // $_SESSOPm['us']
-            
-        }
-
-
-
-        }
+       
 
        
 

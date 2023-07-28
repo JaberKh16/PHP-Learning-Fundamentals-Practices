@@ -37,14 +37,14 @@
 							<div class="form-group d-flex">
 							<input type="password" class="form-control rounded-left" name="user_pass" placeholder="Password" required>
 							</div>
-							<div class="form-group d-md-flex">
+							<!-- <div class="form-group d-md-flex">
 								<div class="w-50">
 									<label class="checkbox-wrap checkbox-primary">Remember Me
 										<input type="checkbox" value="1" name="remember_me">
 										<span class="checkmark"></span>
 									</label>
 								</div>
-							</div>
+							</div> -->
 							<div class="form-group mt-5">
 								<button type="submit" class="btn btn-primary d-block rounded submit px-5" name="btn_login">Login</button>
 							</div>
