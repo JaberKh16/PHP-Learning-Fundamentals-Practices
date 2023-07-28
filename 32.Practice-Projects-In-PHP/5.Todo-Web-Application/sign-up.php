@@ -2,6 +2,8 @@
 
 
     <?php
+        session_start();
+        
         // required the db file
         require_once "./includes/header.php";
         require_once "./config/config.php";
@@ -11,57 +13,51 @@
         if(isset($_POST['btn_signup']))
         {
          
-            // if(empty($_POST['name'])){
-            //     $error = "Name field is required.";
-            // }
-            // if(empty($_POST['email'])){
-            //     $error = "Email field is required.";
-            // }
-            // if(empty($_POST['password'])){
-            //     $error = "Password field is required.";
-            // }
-            // if(empty($_POST['work_desc'])){
-            //     $error = "Work Description field is required.";
-            // }
+            $name = $_POST['user_name'];
+            $email = $_POST['user_email'];
+            $password = $_POST['user_password'];
+
+
+            // Choose a hashing algorithm (e.g., SHA-256)
+            $hashAlgorithm = "sha256";
+            $salt = "jk122";
+            $password = hash($hashAlgorithm, $password.$salt);
+            $work_desc = $_POST['work_desc'];
+            date_default_timezone_set('Asia/Dhaka');
+            $date = new DateTime('now', new DateTimezone('Asia/Dhaka'));
+            $date = $date->format('Y-m-d h:i:s a');
+
+            // $sql_query = "INSERT INTO tbl_users (user_name, user_email, user_password, work_desc, datetimestamp) 
+            //  VALUES (':user_name', ':user_email', ':user_password', ':work_desc', ':datetimestamp')";
+
+            $sql_query = "INSERT INTO  `tbl_users` (user_name, user_email, user_password, work_desc, datetimestamp) 
+                VALUES ('$name', '$email', '$password', '$work_desc', '$date')";
             
-                $name = $_POST['user_name'];
-                $email = $_POST['user_email'];
-                $password = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
-                $work_desc = $_POST['work_desc'];
-                date_default_timezone_set('Asia/Dhaka');
-                $date = new DateTime('now', new DateTimezone('Asia/Dhaka'));
-                $date = $date->format('Y-m-d h:i:s a');
-                var_dump($date);
-
-                // $sql_query = "INSERT INTO tbl_users (user_name, user_email, user_password, work_desc, datetimestamp) 
-                //  VALUES (':user_name', ':user_email', ':user_password', ':work_desc', ':datetimestamp')";
-
-                $sql_query = "INSERT INTO  `tbl_users` (user_name, user_email, user_password, work_desc, datetimestamp) 
-                 VALUES ('$name', '$email', '$password', '$work_desc', '$date')";
-                
-                
-                // $statement = $pdo_conn->prepare($sql_query);
-                // $statement->bindParam(':user_name', $name);
-                // $statement->bindParam(':user_email', $email);
-                // $statement->bindParam(':user_password', $password);
-                // $statement->bindParam(':work_desc', $work_desc);
-                // $statement->bindParam(':datetimestamp', $date);
-
-                // execute the query
-                $statement = $conn->query($sql_query);
-                var_dump($statement);
-                // var_dump($statement->execute() );
-
-                // execute the query
-                if($statement){
-                    $msg = "Successfully registered.";
-                    // echo "<div class='alert alert-success'><strong>$msg</strong></div>";
-                }else{
-                    $msg = "Register again.";
-                }
-                
-                header("Location: ./validate-login.php");
             
+            // $statement = $pdo_conn->prepare($sql_query);
+            // $statement->bindParam(':user_name', $name);
+            // $statement->bindParam(':user_email', $email);
+            // $statement->bindParam(':user_password', $password);
+            // $statement->bindParam(':work_desc', $work_desc);
+            // $statement->bindParam(':datetimestamp', $date);
+
+            // execute the query
+            $statement = $conn->query($sql_query);
+
+            // var_dump($statement->execute() );
+
+            // execute the query
+            if($statement){
+                $msg = "Successfully registered.";
+                // echo "<div class='alert alert-success'><strong>$msg</strong></div>";
+                $_SESSION['user_email'] = $email;
+                $_SESSION['user_name'] = $name;
+            }else{
+                $msg = "Register again.";
+            }
+            
+            header("Location: ./index.php?message='.$msg.'");
+        
         }
     ?>
 
