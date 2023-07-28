@@ -31,12 +31,13 @@
                     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
                         <i class="fa fa-tasks"></i>&nbsp;Task Lists
                     </div>
-                    <a href="./logout.php" type="submit" class="btn btn-primary d-flex justify-content-end rounded submit px-3" name="btn_logout">Login</a>
+                    <?php if($user_email !== NULL): ?>
+                        <a href="./logout.php" style="display:none !important;" type="submit" class="btn btn-primary d-flex justify-content-end rounded submit px-3" name="btn_logout" id="btn_logout">Logout</a>
+                    <?php endif; ?>
+                    <!-- ?> -->
+                    
+                    <button class="btn btn-dark text-white d-flex justify-content-end rounded submit px-3" name="btn_profile" id="btn_profile">User: <?php echo $user_email; ?></button>
                 </div>
-
-            
-
-            
 
             
 
@@ -46,13 +47,50 @@
                 <perfect-scrollbar class="ps-show-limits">
                 <div style="position: static;" class="ps ps--active-y">
                 <div class="ps-content">
+                
+                <?php 
+                    require_once "./operation-function/create_note.php";
+                    
+                    if($user_email !=NULL){
+                        // echo 1;
+                        // get the user info
+                        $user_id = get_user_id($user_email);
+                        // var_dump($user_id);
+                        // $user_details = get_author_details($user_id);
+                        // var_dump($user_details);
 
-                     <!-- Create todo section -->
+
+                        // $new_note = $_GET['new_note'];
+                        // var_dump($new_note);
+                        
+                        if(!isset($_POST['btn_add'])){
+                            // echo 22;
+                            if(!isset($_POST['new_note'])){
+                                // echo 33;
+                             
+
+                                $new_note = $_POST['new_note'];
+                                var_dump($new_note);
+                                
+                                create_note($new_note, $user_id);
+                            }
+                        }
+                        
+                    }
+                    
+                  
+                ?>
+                
+                <form action="" method="POST">
+                    <!-- Create todo section -->
                     <div class="row m-1 p-3">
                         <div class="col col-11 mx-auto">
                             <div class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
+
+
+
                                 <div class="col">
-                                    <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" placeholder="Add new ..">
+                                    <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" name="new_note" type="text" placeholder="Add new .." value="<?php if(isset($_GET['new_note'])){ echo $_GET['new_note'];  }?>">
                                 </div>
                                 <div class="col-auto m-0 px-2 d-flex align-items-center">
                                     <label class="text-secondary my-2 p-0 px-1 view-opt-label due-date-label d-none">Due date not set</label>
@@ -60,12 +98,14 @@
                                     <i class="fa fa-calendar-times-o my-2 px-1 text-danger btn clear-due-date-button d-none" data-toggle="tooltip" data-placement="bottom" title="Clear Due date"></i>
                                 </div>
                                 <div class="col-auto px-0 mx-0 mr-2">
-                                    <button type="button" class="btn btn-primary">Add</button>
+                                    <a href="./todo-app.php?user=<?php echo urlencode($new_note); ?>" type="button" class="btn btn-primary" name="btn_add">Add</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="p-2 mx-4 border-black-25 border-bottom"></div>
+                </form>
+                     
+                    <div class="p-2 mx-4 border-black-25 border-bottom bg-dark text-white"><b>Note Details</b></div>
 
 
                     <ul class=" list-group list-group-flush">
@@ -175,6 +215,19 @@
     <script src="./assets/js/all.min.js"></script>
     <!-- Linking External JS -->
     <script src="./assets/js/all.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            const profileClick = $("#btn_profile");
+            console.log(profileClick);
+            profileClick.on('click', function(){
+                const buttonClick = $("#btn_logout");
+                console.log(buttonClick);
+
+                buttonClick.show();
+                
+            });
+        })
+    </script>
     
 </body>
 </html>
