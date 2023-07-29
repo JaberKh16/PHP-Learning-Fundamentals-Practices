@@ -73,13 +73,46 @@
                                 }
                             }
                         }else{
-                            $msg = "<div class='alert alert-danger p-3 m-4'><strong>Please write something in field</strong></div>";
+                            $msg = "<div class='alert alert-primary bg-primary text-white p-3 m-4'><strong>Please write something in field</strong></div>";
                         }
                         
                     }
                     
                   
                 ?>
+
+                <!-- Modal For Edit Text -->
+                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#openEditModal">Note Edit</a>
+
+                <div class="modal fade" id="openEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Note</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Use the correct form action and method -->
+                                <form action="edit.php" method="POST">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Note:</label>
+                                        <!-- Use PHP to populate the value of the input field -->
+                                        <input type="text" class="form-control" id="recipient-name" name="note" value="<?php echo $note; ?>">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <!-- Use a submit button to send the form data to the PHP script -->
+                                <button type="submit" class="btn btn-primary" form="editForm">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal For Edit Text -->
                 
                 <form action="" method="POST">
                     <!-- Create todo section -->
@@ -162,7 +195,9 @@
             </div>
             <div class="d-block text-right card-footer">
                 <button class="mr-2 btn btn-link btn-sm">Cancel</button>
-                <button class="btn btn-primary">Add Task</button>
+               
+                <button class="btn btn-primary" id="addTask">Add Task</button>
+                <button class="btn btn-primary d-none" id="editTask" >Edit Task</button>
             </div>
         </div>
         </div>
@@ -178,6 +213,10 @@
     <!-- <script src="./assets/js/all.min.js"></script> -->
     <script>
         $(document).ready(function(){
+            const newNote = $("#new_note").val();
+             // Reset the input element's value to empty when the page loads
+            newNote.value = '';
+
             const profileClick = $("#btn_profile");
             console.log(profileClick);
             profileClick.on('click', function(){
@@ -234,7 +273,44 @@
             //         xhr.send("task_id=" + taskId);
             //     }
             // }
+            
+            $("#btn_edit").on('click', function(){
+                $("#addTask").hide();
+                $("#editTask").show();
+            });
+
+
+            
         })
+    </script>
+
+    <!-- Add Bootstrap and jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript to handle the button click and open the modal -->
+    <script>
+
+        // isClickedOnButtonEdit();
+        // function isClickedOnButtonEdit(){
+        //     $('#editModal').on('click', function (event) {
+        //         var button = $(event.relatedTarget) // Button that triggered the modal
+        //         var recipient = button.data('whatever') // Extract info from data-* attributes
+        //         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        //         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        //         var modal = $(this)
+        //         modal.find('.modal-title').text('New message to ' + recipient)
+        //         modal.find('.modal-body input').val(recipient)
+        //     });
+        
+        // }
+
+        $(document).ready(function(){
+            $("#editModal").click(function(){
+                $("#openEditModal").modal('show');
+            });
+        });
     </script>
     
 </body>
