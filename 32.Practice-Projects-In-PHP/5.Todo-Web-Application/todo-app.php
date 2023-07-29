@@ -50,29 +50,24 @@
                 
                 <?php 
                     require_once "./operation-function/create_note.php";
-                    
+                    require_once "./config/config.php";
+
                     if($user_email !=NULL){
                         // echo 1;
                         // get the user info
-                        $user_id = get_user_id($user_email);
+                        $user_id = get_user_id($user_email, $conn);
                         // var_dump($user_id);
                         // $user_details = get_author_details($user_id);
                         // var_dump($user_details);
 
 
-                        // $new_note = $_GET['new_note'];
-                        // var_dump($new_note);
                         
-                        if(!isset($_POST['btn_add'])){
+                        if(isset($_POST['btn_add'])){
                             // echo 22;
-                            if(!isset($_POST['new_note'])){
+                            if(isset($_POST['new_note'])){
                                 // echo 33;
-                             
-
                                 $new_note = $_POST['new_note'];
-                                var_dump($new_note);
-                                
-                                create_note($new_note, $user_id);
+                                create_note($new_note, $user_id, $conn);
                             }
                         }
                         
@@ -86,19 +81,19 @@
                     <div class="row m-1 p-3">
                         <div class="col col-11 mx-auto">
                             <div class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
-
+                       
 
 
                                 <div class="col">
-                                    <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" name="new_note" type="text" placeholder="Add new .." value="<?php if(isset($_GET['new_note'])){ echo $_GET['new_note'];  }?>">
+                                    <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" name="new_note" type="text" placeholder="Add new .." id="new_note" value="<?php if(!isset($_POST['new_note'])){ echo $_POST['new_note'];  }?>">
                                 </div>
-                                <div class="col-auto m-0 px-2 d-flex align-items-center">
+                                <!-- <div class="col-auto m-0 px-2 d-flex align-items-center">
                                     <label class="text-secondary my-2 p-0 px-1 view-opt-label due-date-label d-none">Due date not set</label>
                                     <i class="fa fa-calendar my-2 px-1 text-primary btn due-date-button" data-toggle="tooltip" data-placement="bottom" title="Set a Due date"></i>
                                     <i class="fa fa-calendar-times-o my-2 px-1 text-danger btn clear-due-date-button d-none" data-toggle="tooltip" data-placement="bottom" title="Clear Due date"></i>
-                                </div>
+                                </div> -->
                                 <div class="col-auto px-0 mx-0 mr-2">
-                                    <a href="./todo-app.php?user=<?php echo urlencode($new_note); ?>" type="button" class="btn btn-primary" name="btn_add">Add</a>
+                                    <button type="submit" class="btn btn-primary" name="btn_add" id="btn_add">Add</button>
                                 </div>
                             </div>
                         </div>
@@ -214,7 +209,7 @@
     <!-- Linking Font Awesome JS -->
     <script src="./assets/js/all.min.js"></script>
     <!-- Linking External JS -->
-    <script src="./assets/js/all.min.js"></script>
+    <!-- <script src="./assets/js/all.min.js"></script> -->
     <script>
         $(document).ready(function(){
             const profileClick = $("#btn_profile");
@@ -225,6 +220,28 @@
 
                 buttonClick.show();
                 
+            });
+
+
+            const addBtn = $("#btn_add");
+            addBtn.on('click', function(e){
+                // e.preventDefault();
+                const newNote = $("#new_note").val();
+                const userId = "<?php echo $user_id ; ?>";
+                const action = "create_note";
+
+                $.ajax({
+                    url: "./todo-app.php",
+                    method: "POST",
+                    data: {
+                        'new_note':newNote,
+                        'user_id' :userId,
+                        'action': action
+                    },
+                    success: function(data){
+                        console.log(data);
+                    }
+                });
             });
         })
     </script>

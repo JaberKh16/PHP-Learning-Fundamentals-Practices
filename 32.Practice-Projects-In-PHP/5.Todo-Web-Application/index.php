@@ -86,7 +86,7 @@
 						</div>
 						<h3 class="text-center mb-4">Login</h3>
 						<?php
-							if($msg != NULL){
+							if($msg != NULL && !empty($_GET['user_email']) && !empty($_GET['user_pass'])){
 								echo $msg;
 							}
 						?>
