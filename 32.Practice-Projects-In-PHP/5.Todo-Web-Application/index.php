@@ -38,10 +38,6 @@
 				$salt = "jk122";
 				$inputed_pass = hash($hashAlgorithm, $inputed_pass.$salt);
 				
-				
-				$flag = 0; 
-				// $retun_val = password_verify($inputed_pass, $hashed_password);
-				// $retun_val = substr($inputed_pass, $hashed_password);
 
 				
 				//sql query

@@ -18,7 +18,11 @@
             if(empty($_SESSION['user_email'])){
                 header("Location: ./index.php");
             }
-            $user_email = $_SESSION['user_email'];
+            if(!empty($_SESSION['user_email']) && !empty($_SESSION['user_name'])){
+                $user_email = $_SESSION['user_email'];
+                // header("Location : ./todo-app.php");
+            }
+            
         ?>
 
    
@@ -53,22 +57,23 @@
                     require_once "./config/config.php";
 
                     if($user_email !=NULL){
-                        // echo 1;
                         // get the user info
                         $user_id = get_user_id($user_email, $conn);
                         // var_dump($user_id);
-                        // $user_details = get_author_details($user_id);
-                        // var_dump($user_details);
 
+                        $msg = NULL;
 
-                        
+                        // if the add note button click
                         if(isset($_POST['btn_add'])){
-                            // echo 22;
-                            if(isset($_POST['new_note'])){
-                                // echo 33;
+                            if(isset($_POST['new_note']) && !empty($_POST['new_note'])){
                                 $new_note = $_POST['new_note'];
-                                create_note($new_note, $user_id, $conn);
+                                $is_created = create_note($new_note, $user_id, $conn);
+                                if($is_created == true){
+                                    $msg = "<div class='alert alert-success'><strong>Note Has Been Created</strong></div>"; 
+                                }
                             }
+                        }else{
+                            $msg = "<div class='alert alert-danger p-3 m-4'><strong>Please write something in field</strong></div>";
                         }
                         
                     }
@@ -81,11 +86,16 @@
                     <div class="row m-1 p-3">
                         <div class="col col-11 mx-auto">
                             <div class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
-                       
-
+                                <?php
+                                    if(!empty($_POST['new_note']) && !empty($msg)){
+                                        echo $msg;
+                                    }else{
+                                        echo $msg;
+                                    }
+                                ?>
 
                                 <div class="col">
-                                    <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" name="new_note" type="text" placeholder="Add new .." id="new_note" value="<?php if(!isset($_POST['new_note'])){ echo $_POST['new_note'];  }?>">
+                                    <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" name="new_note" type="text" placeholder="Add new .." id="new_note" value="<?php if(!empty($_POST['new_note'])){ echo $_POST['new_note'];  } else { echo ""; }?>">
                                 </div>
                                 <!-- <div class="col-auto m-0 px-2 d-flex align-items-center">
                                     <label class="text-secondary my-2 p-0 px-1 view-opt-label due-date-label d-none">Due date not set</label>
@@ -93,102 +103,58 @@
                                     <i class="fa fa-calendar-times-o my-2 px-1 text-danger btn clear-due-date-button d-none" data-toggle="tooltip" data-placement="bottom" title="Clear Due date"></i>
                                 </div> -->
                                 <div class="col-auto px-0 mx-0 mr-2">
-                                    <button type="submit" class="btn btn-primary" name="btn_add" id="btn_add">Add</button>
+                                    <button type="submit" class="btn btn-primary" name="btn_add" id="btn_add">Add Note</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form>
                      
-                    <div class="p-2 mx-4 border-black-25 border-bottom bg-dark text-white"><b>Note Details</b></div>
+                    <div class="p-2 mx-4 border-black-25 border-bottom bg-dark text-white mb-3"><b>Note Details</b></div>
+                    <?php
+                        $note_data = get_note_info($user_id, $user_email);
+                        echo $note_data;
+                    ?>
+                    
+                    <!-- <ul class=" list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="todo-indicator bg-warning"></div>
+                            <div class="widget-content p-0">
+                            <div class="widget-content-wrapper">
+                              
 
 
-                    <ul class=" list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div class="todo-indicator bg-warning"></div>
-                        <div class="widget-content p-0">
-                        <div class="widget-content-wrapper">
-                            <div class="widget-content-left mr-2">
-                            <div class="custom-checkbox custom-control">
-                                <input class="custom-control-input"
-                                id="exampleCustomCheckbox12" type="checkbox"><label class="custom-control-label"
-                                for="exampleCustomCheckbox12">&nbsp;</label>
+                                <div class="widget-content-left mr-2">
+                                <div class="custom-checkbox custom-control">
+                                    <input class="custom-control-input"
+                                    id="exampleCustomCheckbox12" type="checkbox"><label class="custom-control-label"
+                                    for="exampleCustomCheckbox12">&nbsp;</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="widget-content-left">
-                                <div class="widget-heading">Call Sam For payments 
-                                    <div class="badge badge-danger ml-2">Rejected</div>
+                                <div class="widget-content-left">
+                                    <div class="widget-heading">
+                          
+                                        
+                                        <div class="badge badge-danger ml-2"></div>
+                                    </div>
+                                    <div class="widget-subheading">
+                                        <i>By </i>
+                                    </div>
                                 </div>
-                                <div class="widget-subheading"><i>By <?php echo $user_email; ?></i></div>
-                            </div>
-                            <div class="widget-content-right">
-                                <button class="border-0 btn-transition btn btn-outline-success">
-                                <i class="fa fa-check"></i></button>
-                                <button class="border-0 btn-transition btn btn-outline-danger">
-                                <i class="fa fa-trash"></i>
-                                
-                                </button>
-                            </div>
-                        </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="todo-indicator bg-focus"></div>
-                        <div class="widget-content p-0">
-                        <div class="widget-content-wrapper">
-                            <div class="widget-content-left mr-2">
-                            <div class="custom-checkbox custom-control"><input class="custom-control-input"
-                                id="exampleCustomCheckbox1" type="checkbox"><label class="custom-control-label"
-                                for="exampleCustomCheckbox1">&nbsp;</label></div>
-                            </div>
-                            <div class="widget-content-left">
-                            <div class="widget-heading">Make payment to Bluedart</div>
-                            <div class="widget-subheading">
-                                <div>By Johnny <div class="badge badge-pill badge-info ml-2">NEW</div>
+                                <div class="widget-content-right">
+                                    <button class="border-0 btn-transition btn btn-outline-success">
+                                        <i class="fa fa-check"></i></button>
+                                        <button class="border-0 btn-transition btn btn-outline-danger">
+                                        <i class="fa fa-trash"></i>
+                                    
+                                    </button>
                                 </div>
-                                
-                            </div>
-                            
-                            </div>
-                            <div class="widget-content-right">
-                            <button class="border-0 btn-transition btn btn-outline-success">
-                                <i class="fa fa-check"></i></button>
-                            <button class="border-0 btn-transition btn btn-outline-danger">
-                                <i class="fa fa-trash"></i>
-                            
-                            </button>
-                            </div>
-                        </div>
-                        </div>
-                    </li>
-                    
-                    
 
-                    <li class="list-group-item">
-                        <div class="todo-indicator bg-success"></div>
-                        <div class="widget-content p-0">
-                        <div class="widget-content-wrapper">
-                            <div class="widget-content-left mr-2">
-                            <div class="custom-checkbox custom-control"><input class="custom-control-input" id="exampleCustomCheckbox10"
-                                type="checkbox"><label class="custom-control-label" for="exampleCustomCheckbox10">&nbsp;</label></div>
                             </div>
-                            <div class="widget-content-left flex2">
-                            <div class="widget-heading">Client Meeting at 11 AM</div>
-                            <div class="widget-subheading">By CEO</div>
                             </div>
-                    
-                            <div class="widget-content-right">
-                            <button class="border-0 btn-transition btn btn-outline-success">
-                                <i class="fa fa-check"></i></button>
-                            <button class="border-0 btn-transition btn btn-outline-danger">
-                                <i class="fa fa-trash"></i>
-                    
-                            </button>
-                            </div>
-                        </div>
-                        </div>
-                    </li>
-                    </ul>
+                        </li>
+                   
+                    </ul> -->
                 </div>
                 
                 </div>
@@ -240,9 +206,34 @@
                     },
                     success: function(data){
                         console.log(data);
+                        loadAllData();
                     }
                 });
             });
+
+            function loadAllData(){
+                window.location.reload();
+            }
+
+
+            // // JavaScript function to handle delete operation using AJAX
+            // function deleteNote(taskId) {
+            //     if (confirm("Are you sure you want to delete this note?")) {
+            //         // Use AJAX to send the delete request to the server
+            //         // Adjust the URL and other parameters based on your backend implementation
+            //         var xhr = new XMLHttpRequest();
+            //         xhr.onreadystatechange = function() {
+            //             if (xhr.readyState == 4 && xhr.status == 200) {
+            //                 // If the delete request is successful, you can handle any response from the server
+            //                 // For example, you might reload the page or update the UI
+            //                 console.log(xhr.responseText);
+            //             }
+            //         };
+            //         xhr.open("POST", "./operation-function/create_note.php", true); // Adjust the URL to the PHP script handling the delete operation
+            //         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            //         xhr.send("task_id=" + taskId);
+            //     }
+            // }
         })
     </script>
     
