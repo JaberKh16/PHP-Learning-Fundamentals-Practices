@@ -199,12 +199,12 @@
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     // If the delete request is successful, you can handle any response from the server
                     // For example, you might reload the page or update the UI
-                    e.preventDefault();
+                    // e.preventDefault();
                     console.log(xhr.responseText);
                 }
             };
             xhr.open("POST", "./operation-function/edit_note.php", true); // Adjust the URL to the PHP script handling the delete operation
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(JSON.stringify(data));
             // alert('Edit Successfully.');
 
