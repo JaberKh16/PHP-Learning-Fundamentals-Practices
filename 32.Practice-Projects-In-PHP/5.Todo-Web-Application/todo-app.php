@@ -20,6 +20,7 @@
             }
             if(!empty($_SESSION['user_email']) && !empty($_SESSION['user_name'])){
                 $user_email = $_SESSION['user_email'];
+                $user_name = $_SESSION['user_name'];
                 // header("Location : ./todo-app.php");
             }
             
@@ -82,7 +83,7 @@
                 ?>
 
                 <!-- Modal For Edit Text -->
-                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#openEditModal">Note Edit</a>
+          
 
                 <div class="modal fade" id="openEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -195,9 +196,9 @@
             </div>
             <div class="d-block text-right card-footer">
                 <button class="mr-2 btn btn-link btn-sm">Cancel</button>
-               
-                <button class="btn btn-primary" id="addTask">Add Task</button>
-                <button class="btn btn-primary d-none" id="editTask" >Edit Task</button>
+<!--                
+                <button class="btn btn-primary" id="addTask">Add Task</button> -->
+                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#openEditModal">Note Edit</a>
             </div>
         </div>
         </div>
@@ -273,11 +274,7 @@
             //         xhr.send("task_id=" + taskId);
             //     }
             // }
-            
-            $("#btn_edit").on('click', function(){
-                $("#addTask").hide();
-                $("#editTask").show();
-            });
+
 
 
             
@@ -309,6 +306,16 @@
         $(document).ready(function(){
             $("#editModal").click(function(){
                 $("#openEditModal").modal('show');
+                const taskDesc = $(this).data('task_id');
+                // const taskDesc = $(this).closest('tr').find('td:nth-child(2)').text();
+
+                $('#task_id').val(taskDesc);
+                // $('#taskName').val(taskName);
+            });
+
+            $("#btn_edit").click(function(){
+                $("#addTask").hide();
+                $("#editTask").show();
             });
         });
     </script>
