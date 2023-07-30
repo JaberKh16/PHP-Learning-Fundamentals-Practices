@@ -208,6 +208,10 @@
             xhr.send(JSON.stringify(data));
             // alert('Edit Successfully.');
 
+            $("#btn_edit").on('click',function(){
+                $("#openEditModal").focus(); 
+            });
+
             $("#hideStatus").on('click', function(){
                 $("#addTask").hide();
                 $("#noteMark").css([

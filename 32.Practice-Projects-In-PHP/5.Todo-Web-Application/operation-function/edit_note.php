@@ -9,10 +9,12 @@
     
 
     // Convert the JSON data to a PHP associative array
-    $data = json_decode($input_data, true);
+    // $data = json_decode($input_data, true);
+    // var_dump($data);
 
-    $task_desc = $input_data['new_note'];
-    $task_id = $input_data['task_id'];
+    // $task_desc = $input_data['new_note'];
+    $task_id = $_POST['task_id'];
+    var_dump($task_id);
     // $action = $input_data['action'];
     // $action($task_id);
 

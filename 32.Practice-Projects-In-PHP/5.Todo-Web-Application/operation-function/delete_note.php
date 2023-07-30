@@ -20,8 +20,8 @@
         // sql query
         $sql_query = "DELETE FROM tbl_tasklist WHERE task_id = '$task_id'";
 
-        // // execute the query
-        // $statement = $conn->query($sql_query);
+        // execute the query
+        $statement = $conn->query($sql_query);
 
         // if($statement !== false){
         //     echo "<script>alert('Deleted Successfully.');</script>";

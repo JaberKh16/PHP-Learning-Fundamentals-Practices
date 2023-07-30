@@ -87,7 +87,7 @@
 
                 <div class="modal fade" id="openEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
-                        <div class="modal-content">
+                        <div class="modal-content bg-dark text-white">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Edit Note</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -107,7 +107,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <!-- Use a submit button to send the form data to the PHP script -->
-                                <button type="submit" class="btn btn-primary" form="editForm">Update</button>
+                                <button type="submit" class="btn btn-success" form="editForm">Update</button>
                             </div>
                         </div>
                     </div>
@@ -198,7 +198,8 @@
                 <button class="mr-2 btn btn-link btn-sm">Cancel</button>
 <!--                
                 <button class="btn btn-primary" id="addTask">Add Task</button> -->
-                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#openEditModal">Note Edit</a>
+                <a href="#" class="btn btn-success text-white" data-toggle="modal" data-target="#openEditModal">
+                    <strong> Edit Note</strong></a>
             </div>
         </div>
         </div>
