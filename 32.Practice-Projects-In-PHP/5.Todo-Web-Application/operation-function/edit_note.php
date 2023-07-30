@@ -15,12 +15,18 @@
     // $task_desc = $input_data['new_note'];
     $task_id = $data['task_id'];
     $action = $data['action'];
-    var_dump($task_id);
+    $new_note = $data['new_note'];
+    // var_dump($task_id);
     
 
 
     // get the task desc
     $task_desc = get_task_desc($task_id);
+    $new_note = $task_desc['task_desc'];
+    echo "<script>
+        const newNote = document.getElementById('new_note'); 
+        newNote.innerHTML = <?php echo $new_note; ?>
+    </script>";
 
     // $action($task_id, $task_desc);
     
