@@ -154,6 +154,15 @@
 <!-- Linking Jquery File -->
 <script src="./assets/js/code.jquery.com_jquery-3.7.0.js"></script>
 <script>
+
+    // $(document).ready(function(){
+    //     let newNote = document.getElementById("new_note");
+    //     if(newNote.value != ''){
+    //         newNote.value = '';
+    //     };
+    // });
+
+
     // JavaScript function to handle delete operation using AJAX
     function deleteNote(taskId) {
         if (confirm("Are you sure you want to delete this note?")) {
@@ -169,7 +178,7 @@
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     // If the delete request is successful, you can handle any response from the server
                     // For example, you might reload the page or update the UI
-                    e.preventDefault();
+                    // e.preventDefault();
                     console.log(xhr.responseText);
                 }
             };
