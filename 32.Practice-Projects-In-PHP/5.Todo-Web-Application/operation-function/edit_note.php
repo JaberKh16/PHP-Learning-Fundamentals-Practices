@@ -61,11 +61,5 @@
     }
 
 ?>
-<script>
-    const newNote = document.getElementById('new_note'); 
-    newNote.value = "<?php echo $_POST['new_note']; ?>";
-    // newNote.setAttribute('value = <?php echo $new_note; ?>');
-    // newNote.innerHTML =
-    //         'Value = ' + ' + newNote.value + ';
-</script>
+
     

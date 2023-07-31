@@ -201,6 +201,12 @@
                     // For example, you might reload the page or update the UI
                     // e.preventDefault();
                     console.log(xhr.responseText);
+                    let newNote = document.getElementById('new_note');
+                    newNote.value = xhr.responseText.replace(/"/g, '');
+
+                    let modalNewNote = document.getElementById("recipient-note"); 
+                    modalNewNote.value =  xhr.responseText.replace(/"/g, '');
+                    // newNote.setAttribute('value', responseText);
                 }
             };
             xhr.open("POST", "./operation-function/edit_note.php", true); // Adjust the URL to the PHP script handling the delete operation
