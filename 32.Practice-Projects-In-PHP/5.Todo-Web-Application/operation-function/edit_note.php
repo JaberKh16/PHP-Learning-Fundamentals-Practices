@@ -23,10 +23,7 @@
     // get the task desc
     $task_desc = get_task_desc($task_id);
     $new_note = $task_desc['task_desc'];
-    echo "<script>
-        const newNote = document.getElementById('new_note'); 
-        newNote.innerHTML = <?php echo $new_note; ?>
-    </script>";
+    echo json_encode($new_note);
 
     // $action($task_id, $task_desc);
     
@@ -62,4 +59,13 @@
         // $statement = $conn->query($sql_query);
 
     }
+
+?>
+<script>
+    const newNote = document.getElementById('new_note'); 
+    newNote.value = "<?php echo $_POST['new_note']; ?>";
+    // newNote.setAttribute('value = <?php echo $new_note; ?>');
+    // newNote.innerHTML =
+    //         'Value = ' + ' + newNote.value + ';
+</script>
     
