@@ -43,20 +43,27 @@
         return $records;
     }
 
-    // $action = $input_data['action'];
-    // $action($task_id);
+    $editFormBtn = $_POST['editForm'];
+    // var_dump($editFormBtn);
 
+    if(isset($_POST['editForm'])){
+        echo 1;
+        // $action = $data['action'];
+        $action($task_id, $task_desc);
+
+    }
+    
     function edit_note($task_id, $task_desc)
     {
         global $conn;
 
      
+        // sql query
+        $sql_query = "UPDATE tbl_tasklist SET task_desc = '$task_desc' WHERE task_id = '$task_id'";
 
-        // // sql query
-        // $sql_query = "UPDATE tbl_tasklist SET task_desc = '$task_desc' WHERE task_id = '$task_id'";
-
-        // // execute the query
-        // $statement = $conn->query($sql_query);
+        // execute the query
+        $statement = $conn->query($sql_query);
+        return $statement;
 
     }
 

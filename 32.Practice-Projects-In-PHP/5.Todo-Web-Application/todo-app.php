@@ -96,10 +96,11 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Use the correct form action and method -->
-                                <form action="edit.php" method="POST">
+                                <form action="./operation-function/edit_note.php" method="POST">
                                     <div class="form-group">
                                         <label for="recipient-note" class="col-form-label">Note:</label>
                                         <!-- Use PHP to populate the value of the input field -->
+                                        <?php echo $_POST['note']?>
                                         <input type="text" class="form-control" id="recipient-note" name="note" value="<?php echo $note; ?>">
                                     </div>
                                 </form>
@@ -107,7 +108,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <!-- Use a submit button to send the form data to the PHP script -->
-                                <button type="submit" class="btn btn-success" form="editForm">Update</button>
+                                <button type="submit" class="btn btn-success" form="editForm" name="editForm" id="editFormUpdate">Update</button>
                             </div>
                         </div>
                     </div>
@@ -318,6 +319,21 @@
                 $("#addTask").hide();
                 $("#editTask").show();
             });
+
+            $("#new_note").on('keyup', function(){
+                $("#editModal").click(function(){
+                    $("#openEditModal").modal('show');
+                    const taskDesc = $(this).data('task_id');
+                    // const taskDesc = $(this).closest('tr').find('td:nth-child(2)').text();
+
+                    $('#task_id').val(taskDesc);
+                    // $('#taskName').val(taskName);
+                });
+            })
+
+            
+            
+
         });
     </script>
  

@@ -210,11 +210,11 @@
                     // For example, you might reload the page or update the UI
                     // e.preventDefault();
                     console.log(xhr.responseText);
-                    let newNote = document.getElementById('new_note');
-                    newNote.value = xhr.responseText.replace(/"/g, '');
+                    // let newNote = document.getElementById('new_note');
+                    // newNote.value = xhr.responseText.replace(/"/g, '').trim();
 
                     let modalNewNote = document.getElementById("recipient-note"); 
-                    modalNewNote.value =  xhr.responseText.replace(/"/g, '');
+                    modalNewNote.value =  xhr.responseText.replace(/"/g, '').trim();
                     // newNote.setAttribute('value', responseText);
                 }
             };
