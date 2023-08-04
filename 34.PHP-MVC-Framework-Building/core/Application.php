@@ -9,4 +9,8 @@
         {
             $this->router = new Router();
         }
+
+        public function run(){
+            return 1;
+        }
     }

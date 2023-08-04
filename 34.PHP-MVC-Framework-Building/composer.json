@@ -1,0 +1,16 @@
+{
+    "name": "jaber/34.php-mvc-framework-building",
+    "autoload": {
+        "psr-4": {
+            "Jaber\\34PhpMvcFrameworkBuilding\\app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Md. Jaber Khan",
+            "email": "md.jaberkhan66@gmail.com"
+        }
+    ],
+
+    "require": {}
+}
