@@ -7,13 +7,18 @@
         // required the db file
         require_once "./includes/header.php";
         require_once "./config/config.php";
+        require_once "./validate-functions.php";
 
         $error = array();
 
         if(isset($_POST['btn_signup']))
         {
          
-            $name = $_POST['user_name'];
+            // $name =  mysql_escape_string($_POST['user_name']);
+            // $email = mysql_escape_string($_POST['user_email']);
+            // $password = mysql_escape_string($_POST['user_password']);
+
+            $name =  $_POST['user_name'];
             $email = $_POST['user_email'];
             $password = $_POST['user_password'];
 
@@ -27,11 +32,19 @@
             $date = new DateTime('now', new DateTimezone('Asia/Dhaka'));
             $date = $date->format('Y-m-d h:i:s a');
 
+
+            // validate entered info
+            // $validated_user_info = validate_name_and_email($name, $email);
+            // var_dump($validated_user_info);
+            // $validated_username = $validated_user_info[0];
+            // $validated_useremail = $validated_user_info[1]; 
+
+
             // $sql_query = "INSERT INTO tbl_users (user_name, user_email, user_password, work_desc, datetimestamp) 
             //  VALUES (':user_name', ':user_email', ':user_password', ':work_desc', ':datetimestamp')";
 
             $sql_query = "INSERT INTO  `tbl_users` (user_name, user_email, user_password, work_desc, datetimestamp) 
-                VALUES ('$name', '$email', '$password', '$work_desc', '$date')";
+                VALUES ('$validated_username', '$validated_useremail', '$password', '$work_desc', '$date')";
             
             
             // $statement = $pdo_conn->prepare($sql_query);
@@ -95,9 +108,12 @@
 						<form action="./sign-up.php" class="login-form" method="POST">
                             <div class="form-group">
 								<input type="text" class="form-control rounded-left" name="user_name" placeholder="Username" required>
+                                <!-- <?php echo isset($errorName)?"<span style= 'color:red'>{$errorName}</<span>":""?> -->
 							</div>
                             <div class="form-group">
 								<input type="email" class="form-control rounded-left" name="user_email" placeholder="Email" required>
+                                <!-- <?php echo isset($errorMail)?"<span style= 'color:red'>{$errorMail}</<span>":""?> -->
+
 							</div>
 							<div class="form-group d-flex">
 							    <input type="password" class="form-control rounded-left" name="user_password" placeholder="Password" required>

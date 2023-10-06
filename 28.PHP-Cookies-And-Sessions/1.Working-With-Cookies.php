@@ -42,24 +42,51 @@
         // set the parameters value for the cookie
         $cookieKey = "Name";
         $cookieValue = "Jaber";
-        $expiresTime = time() + (24 * 60 * 60) * 30;
+        $expiresTime = time() + (24 * 60 * 60) * 2;
 
+        // cookie is being setted
         setCookieValue($cookieKey, $cookieValue, $expiresTime);
 
         function readCookieValue($cookieKey)
         {
             $gettingCookieValue = $_COOKIE[$cookieKey];
+            // var_dump($_COOKIE);
             return $gettingCookieValue;
         }
 
+
         // checks if the cookie is available
         if(!empty(readCookieValue($cookieKey))){
-            echo "Cookie Value: " .readCookieValue($cookieKey);
+            $pattern = "/\d+(\.\d+)?/";
+            $cookie_val = readCookieValue($cookieKey);
+            // echo $cookie_val;
+            $match_case = preg_match($pattern, $cookie_val, $match_case);
+            if($match_case != 1){
+                
+                $expired_cookie_info = deleteCookie($cookieKey, $cookieValue); 
+                if(empty($expired_cookie_info)){
+                    echo "Cookie Value: Expired";
+                }else{
+                    echo "Cookie Value: " .$cookie_val;    
+                }
+                
+            }
+
         }
         else{
             echo "There is no cookie available.";
         }
         
+        function deleteCookie($cookieKey, $cookieValue){
+            $expired_cookie = setcookie($cookieKey, time()-(24*24*3));
+            if($expired_cookie != 1){
+                return $expired_cookie;
+            }
+        }
+
+      
+
+
     ?>
 </body>
 </html>

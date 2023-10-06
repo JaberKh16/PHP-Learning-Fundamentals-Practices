@@ -39,9 +39,9 @@
             4) CURLOPT_POST -- to work with the POST request
             5) CURLOPT_POSTFIELDS -- to work with the POST request and set the field for the post method
             6) CURLOPT_CUSTOMREQUEST -- to tell the server what type of HTTP request you are sending
-            7) CURLOPT_HTTPHEADER -- to tell the server about the HTTP headers information.
+            7) CURLOPT_HTTPHEADER -- to tell the server about the HTTP headers information with request.
             8) CURLOPT_PORT - to the alternative port when working with different protocols.
-            9) CURLOPT_HEADER - to get the header related information. Takes boolean value as parameter.
+            9) CURLOPT_HEADER - to get the response header information. Takes boolean value as parameter.
   
 
         Syntax For The curl_setopt() Function
@@ -80,7 +80,7 @@
 
             1) CURLINFO_HTTP_CODE - to get the http status code info
             2) CURLINFO_CONTENT_TYPE - to get the response content type info
-            3) CURLINFO_CONTENT_LENGTH_DOWNLOAD - to get the response content total length or size.
+            3) CURLINFO_CONTENT_LENGTH_DOWNLOAD - to get the response content total length or size in bytes.
 
                                                             
 -->
