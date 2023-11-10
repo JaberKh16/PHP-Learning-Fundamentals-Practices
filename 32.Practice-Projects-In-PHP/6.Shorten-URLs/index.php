@@ -32,7 +32,7 @@
         <div class="row mt-5">
             <h2 class="text-white text-underline d-flex justify-content-center align-items-center mb-5">Shorten Urls</h2>
             <div class="col-10 offset-1 p-2 border border-round">
-            <form class="d-flex" role="search" action="#" method="POST`">
+            <form class="d-flex" role="search" action="functions/crud-functionality.php" method="POST`">
                 <input class="form-control me-2 text-primary p-2" type="text" placeholder="Enter Url" name="inputted-url"
                 value="<?php if(empty($_POST['inputted-url'])){ echo $inputted_url; }?>" aria-label="Url">
                 <button class="btn btn-outline-primary" type="submit" name="btn-create">Create</button>
