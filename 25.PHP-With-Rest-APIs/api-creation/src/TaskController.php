@@ -1,9 +1,15 @@
 <?php
 
     class TaskController{
-        // public function __construct(){
-        //     $this->middleware("auth");
-        // }
+        
+        private string $request_method = null;
+        private string $request_id = null;
+
+        
+        public function __construct(string $request_method, string $request_id){
+            $this->request_method = $request_method;
+            $this->request_id = $request_id;
+        }
         public function process_request($request_method, $request_id){
             $task_id = intval($request_id);
             $task_type = $request_method;   
