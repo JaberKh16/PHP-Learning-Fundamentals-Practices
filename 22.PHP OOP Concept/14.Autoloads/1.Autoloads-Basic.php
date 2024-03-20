@@ -20,6 +20,17 @@
 	 				$ composer init
 	 		Then provide the necessary configuration setup and you are done with configuration.
 
+	 		To add custom namespace setup the following configuration in - composer.json file
+	 			{
+					"autoload":{
+						"psr-4": {"Namespace\\" : "folder/"}
+					}
+	 			}
+	 		After this create the namespace in the specified - folder/ and then update the composer which will
+	 		generate the necessary autoloads for the custom namespaces.
+	 		To update the composer use the command -
+	 				$ composer update
+
 	 */
 ?>
 
