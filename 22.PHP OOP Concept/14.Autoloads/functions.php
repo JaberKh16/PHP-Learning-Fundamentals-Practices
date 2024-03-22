@@ -1,5 +1,5 @@
 <?php
-class Function
+class FunctionUtil
 {
 	// function to autoload class files
 	public static function auto_load_files(string $class, array $dirs): void {
@@ -15,5 +15,7 @@ class Function
 
 
 $directories = ['Models', 'Database'];
-
-auto_load_files($directories ,Function::auto_load_files($class, $data = $directories));
+spl_autoload_register(
+	$directories,
+	FunctionUtil::auto_load_files($directories ,FunctionUtil::auto_load_files($class, $data = $directories))
+);
