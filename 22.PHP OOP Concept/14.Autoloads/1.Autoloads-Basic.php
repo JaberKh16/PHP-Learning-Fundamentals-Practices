@@ -11,6 +11,9 @@
 	 		To use autoloads, PHP provides a function - spl_autoload_register() 
 
 	 		Syntax:
+	 			spl_autoload_register($callback)
+
+	 		Example:
 	 			spl_autoload_register(function($className){
 					// to include the classes
 					include $className;
@@ -42,23 +45,38 @@
 <?php
 
 	// define a custom autoload function
-	function my_autoloader($class_name) {
-	    // convert class name to lowercase for file naming convention
-	    $file_name = strtolower($class_name) . '.php';
+	function class_autoloader($class_name) {
+	    try{
+	    	// convert class name to lowercase for file naming convention
+		    $class_file_name = strtolower($class_name) . '.php';
 
-	    // check if the file exists
-	    if (file_exists($file_name)) {
-	        // include the class file
-	        include $file_name;
-	    } else {
+		    // all the directories
+		    $directories = ['./Modles', './Database'];
+
+		    foreach ($directories as $directory) {
+		    	$path = $directory . '/' . $class_file_name . '.php';
+		    	var_dump('Autoloads the file: ', $path);
+		        // check if the file exists
+		        if (file_exists($path)) {
+		            // include the class file
+		            include $path;
+		            var_dump('Autoloads the file: ', $path);
+		            // exit the function once the file is included
+		            return;
+		        }
+		    }
 	        // throw an exception or handle the missing class file as needed
 	        throw new Exception("Class '$class_name' not found.");
-	    }
+		}catch(Exception $e){
+			return $e->getMessage();
+		}
 	}
 
 	// register the autoload function
-	spl_autoload_register('my_autoloader');
-
+	$loads = spl_autoload_register('class_autoloader');
+	var_dump($loads);
 	// now you can use classes without explicitly including their files
-	$obj = new MyClass();
-	$obj->someMethod();
+	$obj = new User();
+	// $obj->someMethod();
+
+
