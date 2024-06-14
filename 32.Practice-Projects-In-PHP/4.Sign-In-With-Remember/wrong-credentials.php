@@ -11,10 +11,9 @@
     <!-- Linking External Stylesheet -->
     <link rel="stylesheet" href="./css/style.css">
     <script type="text/javascript">
-        // JavaScript to redirect after 3 seconds
         setTimeout(function() {
             window.location.href = "index.php";
-        }, 3000);
+        }, 3000*2);
     </script>
 </head>
 <body>

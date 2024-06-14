@@ -25,7 +25,7 @@
             
             $_SESSION['user_email'] = $user_email;
             $_SESSION['user_pass'] = $user_pass;
-            header("Location: dashboard.php");
+            header("Location: ./dashboard.php");
             exit(); // ensure the script stops executing after redirection
         } else {
             header("Location: ./wrong-credentials.php");
