@@ -28,9 +28,9 @@
 							<span class="fa fa-user-o"></span>
 						</div>
 						<h3 class="text-center mb-4">Login</h3>
-						<form action="./validate-login.php" class="login-form" method="POST">
+						<form action="validate-login.php" class="login-form" method="POST">
 							<div class="form-group">
-								<input type="email" class="form-control rounded-left" name="user_email" placeholder="Email" required>
+								<input type="email" class="form-control rounded-left" name="user_email" value="<?php echo isset($_POST['user_email']) ? htmlspecialchars($_POST['user_email']) : ''; ?>" placeholder="Email" required>
 							</div>
 							<div class="form-group d-flex">
 							<input type="password" class="form-control rounded-left" name="user_pass" placeholder="Password" required>

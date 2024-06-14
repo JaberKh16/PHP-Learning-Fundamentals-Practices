@@ -15,7 +15,12 @@ class FunctionUtil
 
 
 $directories = ['Models', 'Database'];
-spl_autoload_register(
-	$directories,
-	FunctionUtil::auto_load_files($directories ,FunctionUtil::auto_load_files($class, $data = $directories))
-);
+spl_autoload_register(function ($class) {
+    $directories = ['Models', 'Database']; // Define the directories to search for class files
+    FunctionUtil::auto_load_files($class, $directories);
+});
+
+
+// create instance
+$user = new User;
+var_dump($user);
