@@ -24,31 +24,25 @@
 
 			// required db file
 			require_once "./config/config.php";
-
-
+			require_once "./functions.php";
+			
 
 			if(!isset($_POST['btn_login'])){
 				
-				// get input values from form
-				$inputted_email = $_GET['user_email'];
-				$inputed_pass = $_GET['user_pass'];
-
-				// Choose a hashing algorithm (e.g., SHA-256)
-				$hashAlgorithm = "sha256";
-				$salt = "jk122";
-				$inputed_pass = hash($hashAlgorithm, $inputed_pass.$salt);
-				
+				$form_fields = setup_signin_authentication($_GET, $conn);
 
 				
-				//sql query
-				$sql_query = "SELECT * FROM `tbl_users` WHERE user_email = '$inputted_email'";
-
-				// execute the query 
-				$statement = $conn->query($sql_query);
+				// prepare and execute the query securely
+				$sql_query = "SELECT * FROM `tbl_users` WHERE user_email = ?";
+				$statement = $conn->prepare($sql_query);
+				$statement->bind_param("s", $form_fields['email']);
+				$statement->execute();
 
 				// get the data
-				$user_records = $statement->fetch_assoc();
-
+				$result = $statement->get_result();
+				$user_records = $result->fetch_assoc();
+				// var_dump($user_records, $result);
+				// exit;
 
 				$user_name = $user_records['user_name'];
 				$user_email = $user_records['user_email'];
@@ -58,18 +52,17 @@
 				$msg = NULL;
 				
 				
-				if($inputed_pass == $user_pass && $user_email == $inputted_email){
+				if($form_fields['password'] == $user_pass && $user_email == $form_fields['email']){
 					$msg = "Successfully Login";
-					$_SESSION['user_email'] = $user_email;
-					$_SESSION['user_name'] = $user_name;
-					header("Location: ./todo-app.php");
+					$setup_session_variable = setup_essential_session_cookie($_SESSION);
+					if($setup_session_variable!= null){
+						header("Location: ./todo-app.php");
+					}
+					exit;
 				}else{
 					$msg = "<div class='alert alert-danger'><strong>Wrong Credentials, Try Again</strong></div>";
 				}
 			
-
-
-				
 			}
 		?>
 

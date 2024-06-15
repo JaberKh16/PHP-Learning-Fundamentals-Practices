@@ -7,76 +7,57 @@
         // required the db file
         require_once "./includes/header.php";
         require_once "./config/config.php";
-        require_once "./validate-functions.php";
+        require_once "./functions.php";
 
         $error = array();
 
         if(isset($_POST['btn_signup']))
         {
-         
-            // $name =  mysql_escape_string($_POST['user_name']);
-            // $email = mysql_escape_string($_POST['user_email']);
-            // $password = mysql_escape_string($_POST['user_password']);
+        
+        
+            $form_fields = setup_signup_authentication($_POST, $conn);
+           
 
-            $name =  $_POST['user_name'];
-            $email = $_POST['user_email'];
-            $password = $_POST['user_password'];
+            if(empty($form_fields['name']) || empty($form_fields['email']) || empty($form_fields['password']) || empty($form_fields['work_desc'])){
+                $msg = "Validation failed, missing required fields.";
+                $error = [ $msg ];
+            }else{   
+                // $sql_query = "INSERT INTO tbl_users (user_name, user_email, user_password, work_desc, datetimestamp) 
+                //  VALUES (':user_name', ':user_email', ':user_password', ':work_desc', ':datetimestamp')";
+                $sql_query = "INSERT INTO `tbl_users` (user_name, user_email, user_password, work_desc, datetimestamp) 
+                      VALUES ('{$form_fields["name"]}', '{$form_fields["email"]}', '{$form_fields["password"]}', '{$form_fields["work_desc"]}', '{$form_fields["date"]}')";
+                
+                
+                // $statement = $pdo_conn->prepare($sql_query);
+                // $statement->bindParam(':user_name', $name);
+                // $statement->bindParam(':user_email', $email);
+                // $statement->bindParam(':user_password', $password);
+                // $statement->bindParam(':work_desc', $work_desc);
+                // $statement->bindParam(':datetimestamp', $date);
 
+                // execute the query
+                $statement = $conn->query($sql_query);
 
-            // Choose a hashing algorithm (e.g., SHA-256)
-            $hashAlgorithm = "sha256";
-            $salt = "jk122";
-            $password = hash($hashAlgorithm, $password.$salt);
-            $work_desc = $_POST['work_desc'];
-            date_default_timezone_set('Asia/Dhaka');
-            $date = new DateTime('now', new DateTimezone('Asia/Dhaka'));
-            $date = $date->format('Y-m-d h:i:s a');
-
-
-            // validate entered info
-            // $validated_user_info = validate_name_and_email($name, $email);
-            // var_dump($validated_user_info);
-            // $validated_username = $validated_user_info[0];
-            // $validated_useremail = $validated_user_info[1]; 
-
-
-            // $sql_query = "INSERT INTO tbl_users (user_name, user_email, user_password, work_desc, datetimestamp) 
-            //  VALUES (':user_name', ':user_email', ':user_password', ':work_desc', ':datetimestamp')";
-
-            $sql_query = "INSERT INTO  `tbl_users` (user_name, user_email, user_password, work_desc, datetimestamp) 
-                VALUES ('$validated_username', '$validated_useremail', '$password', '$work_desc', '$date')";
-            
-            
-            // $statement = $pdo_conn->prepare($sql_query);
-            // $statement->bindParam(':user_name', $name);
-            // $statement->bindParam(':user_email', $email);
-            // $statement->bindParam(':user_password', $password);
-            // $statement->bindParam(':work_desc', $work_desc);
-            // $statement->bindParam(':datetimestamp', $date);
-
-            // execute the query
-            $statement = $conn->query($sql_query);
-
-            // var_dump($statement->execute() );
-
-            // execute the query
-            if($statement){
-                $msg = "Successfully registered.";
-                // echo "<div class='alert alert-success'><strong>$msg</strong></div>";
-                $_SESSION['user_email'] = $email;
-                $_SESSION['user_name'] = $name;
-                echo "
-                    <script>alert('Redirecting to login page');</script>
-                    <script>location.href = './index.php'; </script>
-                    ";
-                // header("Location: ./sign-up.php?message='.$msg.'");
-            }else{
-                $msg = "Register again.";
+                // execute the query
+                if($statement){
+                    $msg = "Successfully registered.";
+                    $_SESSION['user_email'] = $email;
+                    $_SESSION['user_name'] = $name;
+                    echo "
+                        <script>alert('Redirecting to login page');</script>
+                        <script>location.href = './index.php'; </script>
+                        ";
+                    exit;
+                    // header("Location: ./sign-up.php?message='.$msg.'");
+                }else{
+                    $msg = "Register again.";
+                }
             }
             
-            
-        
         }
+  
+
+       
     ?>
 
 	<section class="ftco-section">
@@ -100,10 +81,7 @@
                                 }
                                 
                             }
-                            if($msg !=null){
-                                echo "<div class='alert alert-success'><strong>$msg</strong></div>";
-                            }
-                             
+    
                         ?>
 						<form action="./sign-up.php" class="login-form" method="POST">
                             <div class="form-group">
