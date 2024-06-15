@@ -3,6 +3,24 @@
 require "./validate-functions.php";
 
 
+function check_if_already_registered_mail($user_email, $conn){
+    $user_email = mysqli_real_escape_string($conn, $user_email);
+
+    // sql query
+    $sql_query = "SELECT * FROM `tbl_users` WHERE user_email = ?";
+
+    //preapre the statement
+    $statement = $conn->prepare($sql_query);
+    $statement->bind_param('s', $user_email);
+    $statement->execute();
+
+    // get the result
+  	$result = $statement->get_result();
+
+    return $result;
+
+}
+
 function setup_signup_authentication($user_details, $conn){
     $name =  $user_details['user_name'];
     $email = $user_details['user_email'];
@@ -28,7 +46,7 @@ function setup_signup_authentication($user_details, $conn){
 }
 
 function setup_password_hashing($inputted_password){
-     // Choose a hashing algorithm (e.g., SHA-256)
+    // Choose a hashing algorithm (e.g., SHA-256)
     $hashAlgorithm = "sha256";
     $salt = "jk122";
     $hashed_password = hash($hashAlgorithm, $inputted_password.$salt);

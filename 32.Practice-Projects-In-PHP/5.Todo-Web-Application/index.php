@@ -40,28 +40,36 @@
 
 				// get the data
 				$result = $statement->get_result();
-				$user_records = $result->fetch_assoc();
-				// var_dump($user_records, $result);
-				// exit;
 
-				$user_name = $user_records['user_name'];
-				$user_email = $user_records['user_email'];
-				$user_pass = $user_records['user_password'];
+				if ($result && $result->num_rows > 0) {
+					
+					$user_records = $result->fetch_assoc();
+			
+					$user_name = $user_records['user_name'];
+					$user_email = $user_records['user_email'];
+					$user_pass = $user_records['user_password'];
 
-				
-				$msg = NULL;
-				
-				
-				if($form_fields['password'] == $user_pass && $user_email == $form_fields['email']){
-					$msg = "Successfully Login";
-					$setup_session_variable = setup_essential_session_cookie($_SESSION);
-					if($setup_session_variable!= null){
-						header("Location: ./todo-app.php");
+					
+					$msg = NULL;
+					
+					
+					if($form_fields['password'] == $user_pass && $user_email == $form_fields['email']){
+						$msg = "Successfully Login";
+						$_SESSION['user_email'] = $form_fields['email'];
+						$_SESSION['user_name'] = $user_name; 
+						$setup_session_variable = setup_essential_session_cookie($_SESSION);
+			
+						if($setup_session_variable!= null){
+							header("Location: ./todo-app.php");
+						}
+						exit;
+					}else{
+						$msg = "<div class='alert alert-danger'><strong>Wrong Credentials, Try Again</strong></div>";
 					}
-					exit;
 				}else{
-					$msg = "<div class='alert alert-danger'><strong>Wrong Credentials, Try Again</strong></div>";
+					$msg = "<div class='alert alert-danger'><strong>Please signup for the service.</strong></div>";
 				}
+
 			
 			}
 		?>

@@ -21,7 +21,14 @@
             if(empty($form_fields['name']) || empty($form_fields['email']) || empty($form_fields['password']) || empty($form_fields['work_desc'])){
                 $msg = "Validation failed, missing required fields.";
                 $error = [ $msg ];
-            }else{   
+            }else{  
+
+                $check_for_existed_email = check_if_already_registered_mail($form_fields['email'], $conn);
+
+                if($check_for_existed_email->num_rows > 0){
+                    $msg =  "Email: ".$user_email . "already resgistered, please try with new email";
+                }
+                            
                 // $sql_query = "INSERT INTO tbl_users (user_name, user_email, user_password, work_desc, datetimestamp) 
                 //  VALUES (':user_name', ':user_email', ':user_password', ':work_desc', ':datetimestamp')";
                 $sql_query = "INSERT INTO `tbl_users` (user_name, user_email, user_password, work_desc, datetimestamp) 
