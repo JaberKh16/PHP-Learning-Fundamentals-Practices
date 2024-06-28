@@ -49,5 +49,5 @@
 	require_once "./src/Model/Customer.php";
 
 	// create an instance
-	$customer = new Customer('Janet');
+	$customer = new \Store\Model\Customer('Janet');
 	var_dump($customer);
