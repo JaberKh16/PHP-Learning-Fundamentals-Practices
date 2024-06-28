@@ -196,6 +196,8 @@ i {
 }
 
 .checked-class {
-  background-color: yellow;
+  background-color: #c9c9c2 !important;
   text-decoration: line-through;
+  font-size: 28px;
+  font-weight: 900;
 }

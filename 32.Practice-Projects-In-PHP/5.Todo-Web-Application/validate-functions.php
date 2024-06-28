@@ -61,4 +61,16 @@
 		}
 	}
 
+	function validation_errors_callback($errorArr, $errType, $msg = NULL) {
+		if ($errType == 'Missing Fields') {
+			$errorArr = array('Field Missing' => $msg);
+		} elseif ($errType == 'Already registered') {
+			$errorArr = array('Already registered' => $msg);
+		} else {
+			$errorArr = [];
+		}
+		return $errorArr;
+	}
+
+
 ?>

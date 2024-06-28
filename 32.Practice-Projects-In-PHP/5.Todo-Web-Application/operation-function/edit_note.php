@@ -2,23 +2,16 @@
 
     require_once "../config/config.php";
 
-    // Get the JSON data from the AJAX request
+    // get the JSON data from the AJAX request
     $input_data = file_get_contents('php://input');
-    // $input_data = $_POST['new_note'];
-    // var_dump($input_data);
-    
-
     // Convert the JSON data to a PHP associative array
     $data = json_decode($input_data, true);
-    // var_dump($data);
 
-    // $task_desc = $input_data['new_note'];
+    // extracting the $data array
     $task_id = $data['task_id'];
     $action = $data['action'];
     $new_note = $data['new_note'];
-    // var_dump($task_id);
-    
-
+  
 
     // get the task desc
     $task_desc = get_task_desc($task_id);
@@ -31,22 +24,23 @@
         global $conn;
 
         // sql query
-        $sql_query = "SELECT task_desc FROM tbl_tasklist WHERE task_id = $task_id";
+        $sql_query = "SELECT task_desc FROM `tbl_tasklist` WHERE id = ?";
+        $statement = $conn->prepare($sql_query);
+        $statement->bind_param('s', $task_id);
+        $statement->execute();
 
         // execute the query
-        $statement = $conn->query($sql_query);
+        $result = $statement->get_result();
         
         // fetch the query
-        $records = $statement->fetch_assoc();
- 
-
+        $records = $result->fetch_assoc();
         return $records;
     }
 
-    $editFormBtn = $_POST['editForm'];
-    // var_dump($editFormBtn);
+    $editFormBtn = $_POST['editFormBtn'];
 
-    if(isset($_POST['editForm'])){
+
+    if(isset($_POST['editFormBtn'])){
         echo 1;
         // $action = $data['action'];
         $action($task_id, $task_desc);
@@ -59,12 +53,17 @@
 
      
         // sql query
-        $sql_query = "UPDATE tbl_tasklist SET task_desc = '$task_desc' WHERE task_id = '$task_id'";
+        $sql_query = "UPDATE tbl_tasklist SET task_desc = ? WHERE id = ?";
+        $statement = $conn->prepare($sql_query);
+        $statement->bind_param('ss', $task_id, $task_desc);
 
         // execute the query
-        $statement = $conn->query($sql_query);
-        return $statement;
-
+        $is_executed = $statement->execute();
+        if($is_executed){
+            return $statement;
+        }else{
+            echo "<script>alert('Updation failed.');</script>";
+        }
     }
 
 ?>

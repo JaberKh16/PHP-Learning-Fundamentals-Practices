@@ -20,15 +20,20 @@
 
             if(empty($form_fields['name']) || empty($form_fields['email']) || empty($form_fields['password']) || empty($form_fields['work_desc'])){
                 $msg = "Validation failed, missing required fields.";
-                $error = [ $msg ];
+                $error_type = 'Missing Fields';
+                // $error = [ $msg ];
+                $error = validation_errors_callback($error, $error_type, $msg);
             }else{  
 
                 $check_for_existed_email = check_if_already_registered_mail($form_fields['email'], $conn);
 
                 if($check_for_existed_email->num_rows > 0){
-                    $msg =  "Email: ".$user_email . "already resgistered, please try with new email";
+                    $msg =  "Email: ".$user_email . "already resgistered, please try with different email";
+                    $error_type = 'Already registered';
+                    $error = validation_errors_callback($error, $error_type, $msg);
                 }
-                            
+
+                      
                 // $sql_query = "INSERT INTO tbl_users (user_name, user_email, user_password, work_desc, datetimestamp) 
                 //  VALUES (':user_name', ':user_email', ':user_password', ':work_desc', ':datetimestamp')";
                 $sql_query = "INSERT INTO `tbl_users` (user_name, user_email, user_password, work_desc, datetimestamp) 
@@ -83,39 +88,49 @@
 						<h3 class="text-center mb-4">Sign-up</h3>
                         <?php
                             if(!empty($error)){
+                            
                                 foreach($error as $err){
-                                    echo "<div class='alert alert-danger'><strong>$err</strong></div>";
+                                    $msg = "<div class='alert alert-danger'><strong>$err</strong></div>";
+                                    echo $msg;
                                 }
                                 
+                            }else{
+                                $msg = "";
+                                echo $msg;
                             }
     
                         ?>
 						<form action="./sign-up.php" class="login-form" method="POST">
                             <div class="form-group">
-								<input type="text" class="form-control rounded-left" name="user_name" placeholder="Username" required>
-                                <!-- <?php echo isset($errorName)?"<span style= 'color:red'>{$errorName}</<span>":""?> -->
+                                <input type="text" class="form-control rounded-left" name="user_name" placeholder="Username" value="<?php echo !empty($_POST['user_name']) ? $_POST['user_name'] : ""; ?>">
+                                <?php echo empty($_POST['user_name']) ? "<span style='color:red'>Username is required</span>" : ""; ?>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" class="form-control rounded-left" name="user_email" placeholder="Email" value="<?php echo !empty($_POST['user_email']) ? $_POST['user_email'] : ""; ?>">
+                                <?php echo empty($_POST['user_email']) ? "<span style='color:red'>Email is required</span>" : ""; ?>
+                            </div>
+
+                            
+							<div class="form-group">
+							    <input type="password" class="form-control rounded-left" name="user_password" placeholder="***************">
+                                <?php echo empty($_POST['user_password']) ? "<span style='color:red'>Password is required</span>" : ""; ?>
 							</div>
                             <div class="form-group">
-								<input type="email" class="form-control rounded-left" name="user_email" placeholder="Email" required>
-                                <!-- <?php echo isset($errorMail)?"<span style= 'color:red'>{$errorMail}</<span>":""?> -->
-
-							</div>
-							<div class="form-group d-flex">
-							    <input type="password" class="form-control rounded-left" name="user_password" placeholder="Password" required>
-							</div>
-                            <div class="form-group d-flex">
-							    <select class="form-control" name="work_desc">
-                                    <option value="">------------------------------------------------------</option>
-                                    <option value="Student">Student</option>
-                                    <option value="Job Holder">Job Holder</option>
+                                <select class="form-control" name="work_desc">
+                                    <option value="" selected disabled->Please Select Designation</option>
+                                    <option value="Student" <?php echo (!empty($_POST['work_desc']) && $_POST['work_desc'] == 'Student') ? 'selected' : ''; ?>>Student</option>
+                                    <option value="Job Holder" <?php echo (!empty($_POST['work_desc']) && $_POST['work_desc'] == 'Job Holder') ? 'selected' : ''; ?>>Job Holder</option>
                                 </select>
-							</div>
+                                <?php echo empty($_POST['work_desc']) ? "<span style='color:red'>Please select your work description</span>" : ""; ?>
+                            </div>
+
 
 							<div class="form-group mt-5">
 								<button type="submit" class="btn btn-primary d-block rounded submit px-5" name="btn_signup">Register</button>
 							</div>
 							<div class="w-100 d-block text-md-right">
-								<p class="text-dark">Already a member? <a href="./index.php" class="text-primary">Sign-in</a>
+								<p class="text-dark">Already a member? <a href="./index.php" class="text-primary">Sign-in</a>-
 							</div>
 						</form>
 	        		</div>

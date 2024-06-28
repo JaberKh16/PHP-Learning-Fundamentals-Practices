@@ -119,37 +119,7 @@
                   
                 ?>
 
-                <!-- Modal For Edit Text -->
-                <div class="modal fade" id="openEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content bg-dark text-white">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Note</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Use the correct form action and method -->
-                                <form action="./operation-function/edit_note.php" method="POST">
-                                    <div class="form-group">
-                                        <label for="recipient-note" class="col-form-label">Note:</label>
-                                        <!-- Use PHP to populate the value of the input field -->
-                                        <?php echo $_POST['note']?>
-                                        <input type="text" class="form-control" id="recipient-note" name="note" value="<?php echo $note; ?>">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <!-- Use a submit button to send the form data to the PHP script -->
-                                <button type="submit" class="btn btn-success" form="editForm" name="editForm" id="editFormUpdate">Update</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal For Edit Text -->
+                <!-- Basic Form -->
                 <form action="" method="POST">
                     <!-- Create todo section -->
                     <div class="row m-1 p-3">
@@ -230,23 +200,54 @@
             </div>
             <div class="d-block text-right card-footer">
                 <button class="mr-2 btn btn-link btn-sm">Cancel</button>
-<!--                
-                <button class="btn btn-primary" id="addTask">Add Task</button> -->
+                <!-- <button class="btn btn-primary" id="addTask">Add Task</button> -->
                 <a href="#" class="btn btn-success text-white" data-toggle="modal" data-target="#openEditModal">
                     <strong> Edit Note</strong></a>
             </div>
+
+
+            <!-- Modal For Edit Text -->
+            <div class="modal fade" id="openEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-dark text-white">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Note</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Use the correct form action and method -->
+                            <form action="./operation-function/edit_note.php" method="POST">
+                                <div class="form-group">
+                                    <label for="recipient-note" class="col-form-label">Note:</label>
+                                    <!-- Use PHP to populate the value of the input field -->
+                                    <?php echo $_POST['note']?>
+                                    <input type="text" class="form-control" id="recipient-note" name="note" value="<?php echo $_POST['note']; ?>">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="openEditModal" id="closeModalBtn">Close</button>
+                            <!-- Use a submit button to send the form data to the PHP script -->
+                            <button type="submit" class="btn btn-success" form="editForm" name="editFormBtn" id="editFormUpdate">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         </div>
         </div>
     </div>
 
     <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                $('#successMessage').fadeOut('slow');
-                $('#errorMessage').fadeOut('slow');
-            }, 3000); // 3000 milliseconds = 3 seconds
-        });
+        // $(document).ready(function() {
+        //     setTimeout(function() {
+        //         $('#successMessage').fadeOut('slow');
+        //         $('#errorMessage').fadeOut('slow');
+        //     }, 3000); // 3000 milliseconds = 3 seconds
+        // });
     </script>
     
     <script>
@@ -306,9 +307,10 @@
                 checkboxItem.on('click', function(e){
                     // console.log(e.target.checked);
                     if(e.target.checked){
-                        e.target.closest('.widget-content-wrapper').querySelector('.widget-heading').classList.add('checked-class');
+                        e.target.closest('.list-group ').classList.add('checked-class');
                     }else{
-                        e.target.closest('.widget-content-wrapper').querySelector('.widget-heading').classList.remove('checked-class');
+                    //    e.target.closest('.list-group ').querySelector('.list-group-item').classList.remove('checked-class');
+                       e.target.closest('.list-group ').classList.add('checked-class');
                     }
                 });
 
@@ -348,50 +350,35 @@
     <!-- JavaScript to handle the button click and open the modal -->
     <script>
 
-        // isClickedOnButtonEdit();
-        // function isClickedOnButtonEdit(){
-        //     $('#editModal').on('click', function (event) {
-        //         var button = $(event.relatedTarget) // Button that triggered the modal
-        //         var recipient = button.data('whatever') // Extract info from data-* attributes
-        //         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        //         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        //         var modal = $(this)
-        //         modal.find('.modal-title').text('New message to ' + recipient)
-        //         modal.find('.modal-body input').val(recipient)
-        //     });
-        
-        // }
-
         $(document).ready(function(){
-            $("#editModal").click(function(){
-                $("#openEditModal").modal('show');
-                const taskDesc = $(this).data('task_id');
-                // const taskDesc = $(this).closest('tr').find('td:nth-child(2)').text();
+            // $("#editModal").click(function(){
+            //     $("#openEditModal").modal('show');
+            //     const taskDesc = $(this).data('task_id');
+            //     // const taskDesc = $(this).closest('tr').find('td:nth-child(2)').text();
 
-                $('#task_id').val(taskDesc);
-                // $('#taskName').val(taskName);
-            });
+            //     $('#task_id').val(taskDesc);
+            //     // $('#taskName').val(taskName);
+            // });
 
-            $("#btn_edit").click(function(){
-                $("#addTask").hide();
-                $("#editTask").show();
-            });
+            // $("#btn_edit").click(function(){
+            //     $("#addTask").hide();
+            //     $("#editTask").show();
+            // });
 
-            $("#new_note").on('keyup', function(){
-                $("#editModal").click(function(){
-                    $("#openEditModal").modal('show');
-                    const taskDesc = $(this).data('task_id');
-                    // const taskDesc = $(this).closest('tr').find('td:nth-child(2)').text();
+            // $("#new_note").on('keyup', function(){
+            //     $("#editModal").click(function(){
+            //         $("#openEditModal").modal('show');
+            //         const taskDesc = $(this).data('task_id');
+            //         // const taskDesc = $(this).closest('tr').find('td:nth-child(2)').text();
 
-                    $('#task_id').val(taskDesc);
-                    // $('#taskName').val(taskName);
-                });
-            })
+            //         // $('#task_id').val(taskDesc);
+            //         // $('#taskName').val(taskName);
+            //     });
+            // })
             
 
         });
     </script>
- 
     
 </body>
 </html>
