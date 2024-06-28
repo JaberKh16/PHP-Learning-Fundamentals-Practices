@@ -4,7 +4,14 @@
 	 * 		========================
 	 * 		Namespace is the analogy to group related classes into a folder to avoid naming collision. Its like grouping files
 	 * 		into a singluar enitty.
-	 *
+	 * 		
+	 * 		Terms For Namespace
+	 *      -------------------
+	 *      1. Namespace are case sensitive
+	 * 	    2. namespace should be always in the first line.
+	 * 		3. Only Classes, Interface, Functions and Constants should be defined in namepaces.
+	 *		4. Use the backslash(\) to refer to sub directories or file name.
+	  
 	 * 		To create a namespace use the keyword - 'namespace' prefix before the filename.
 	 *
 	 *		Syntax:
@@ -40,6 +47,9 @@
 						namespace App;
 						$publish_at = new \DateTime();
 						echo $publish_at->format('Y-m-d H:i:s');
+
+
+
 	 *
 	 */
 ?>
@@ -49,5 +59,5 @@
 	require_once "./src/Model/Customer.php";
 
 	// create an instance
-	$customer = new \Store\Model\Customer('Janet');
+	$customer = new \Store\Model\Customer('Janet'); 
 	var_dump($customer);
