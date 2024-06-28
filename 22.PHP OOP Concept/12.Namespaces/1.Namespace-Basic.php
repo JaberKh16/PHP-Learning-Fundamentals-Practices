@@ -46,7 +46,7 @@
 
 <?php
 	// require_once "src/Model/Customer.php";
-	require_once "/opt/lampp/htdocs/PHP-Learning-Fundamentals-Practices/22.PHP OOP Concept/12.Namespace/src/Model/Customer.php";
+	require_once "./src/Model/Customer.php";
 
 	// create an instance
 	$customer = new Customer('Janet');

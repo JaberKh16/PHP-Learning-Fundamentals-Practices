@@ -1,6 +1,6 @@
 <?php
 // define the namespace
-// namespace Store\Model;
+namespace Store\Model;
 
 class Customer
 {
