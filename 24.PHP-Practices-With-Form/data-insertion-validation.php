@@ -41,6 +41,10 @@
         $statement->bindParam(':product_price', $productPrice);
         $statement->bindParam(':product_status', $productStatus);
         $statement->bindParam(':created_time', $createdTime);
+
+
+        // execute statement
+        $executed = $statement->execute();
         
 
     }

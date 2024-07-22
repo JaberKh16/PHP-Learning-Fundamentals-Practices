@@ -3,7 +3,7 @@
     // set the parameters
     $hostName = "localhost";
     $portNo = 3312;
-    $dbName = "register_login";
+    $dbName = "php_practice_products";
     $userName = "root";
     $userPass = "";
 
